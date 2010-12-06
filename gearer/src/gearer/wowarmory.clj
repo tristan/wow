@@ -34,8 +34,8 @@
 			b "page/itemTooltips/itemTooltip/bonding")
 	      :classId (x/select-node-content
 			b "page/itemTooltips/itemTooltip/classId")
-	      :slot (x/select-node-content
-		     b "page/itemTooltips/itemTooltip/equipData/inventoryType")
+	      :invType (x/select-node-content
+			b "page/itemTooltips/itemTooltip/equipData/inventoryType")
 	      :itemLevel (x/select-node-content
 			  b "page/itemTooltips/itemTooltip/itemLevel")
 	      :requiredLevel (or (x/select-node-content

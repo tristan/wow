@@ -66,7 +66,7 @@
 (defmethod select-node false [tree path]
   (if (empty? path) ; we want to return the root of the tree at this point
     tree
-    (let [f (filter #(= (% :tag) ((first path) :tag)) (tree :content))]
+    (let [f (filter #(= (% :tag) ((first path) :tag)) (remove string? (tree :content)))]
       (if (empty? f)
 	nil ; not found, return nil
 	(if (> (count f) ((first path) :index))

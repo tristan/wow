@@ -1,50 +1,9 @@
 (ns gearer.core
+  (:use gearer.xml)
   (:require
   ;[http.async.client :as c]
    [clj-http.client :as c]
    [clojure.contrib.str-utils :as re]))
-
-
-(defn check-conds [tree-node path-node]
-;  (println "CHECK:" (= (tree-node :tag) (path-node :tag))
-;	   (tree-node :tag) (tree-node :attrs) path-node)
-  (and (= (tree-node :tag) (path-node :tag))
-       (if (contains? path-node :class)
-	 (if (contains? (tree-node :attrs) :class)
-	   (not (nil? (re-find (re-pattern (path-node :class))
-			       ((tree-node :attrs) :class))))
-	   false)
-	 true)
-       (if (contains? path-node :id)
-	 (if (contains? (tree-node :attrs) :id)
-	   (= (path-node :id)
-	      ((tree-node :attrs) :id))
-	   false)
-	 true)))
-
-(defn- tree-walker1 [tree path]
-;  (println "TW1: " (tree :tag) (tree :attrs) path)
-  (cond (empty? path)
-	tree
-	(not (contains? tree :content))
-	(throw (Exception. "failed to walk tree due to invalid tree"))
-	:else
-	(tree-walker1
-	 (let [f (filter #(check-conds % (first path)) (tree :content))]
-	   (if (empty? f)
-	     (throw (Exception. (apply str "failed to follow tree at point:"
-				       (first path))))
-	     (first f)))
-	 (rest path))))
-
-(defn tree-walker [tree path]
-  (cond (map? tree)
-	(if (check-conds tree (first path)) ; make sure the root of the tree is
-	  (tree-walker1 tree (rest path)) ; the first path-node and start the sub
-	  (throw (Exception. (apply str "failed to follow tree at point:"
-				    (first path)))))
-	:else
-	(throw (Exception. "failed to walk tree due to invalid tree"))))
 
 (defn get-xml-from-url [url]
   (let [response ;(c/GET url)]
@@ -53,6 +12,7 @@
     (let [xmlstream (java.io.ByteArrayInputStream. (.getBytes (response :body)))
 	  xmlmap (clojure.xml/parse xmlstream)]
       xmlmap)))
+
 
 (def items-search-table-body [{:tag :html}
 			      {:tag :body}
