@@ -111,10 +111,8 @@
   };
   
   function goPath(newPath) {
-    if (newPath) {
-      // $.log("goPath", newPath)
-      window.location = '#'+newPath;
-    }
+    // $.log("goPath", newPath)
+    window.location = '#'+newPath;
     _lastPath = getPath();
   };
   

@@ -248,4 +248,156 @@
 	  item)
       	]
     item))
-   
+
+(defn character [region server name]
+  (let [b (get-xml (str "http://" region 
+			".battle.net/wow/en/character/"
+			(.toLowerCase server) "/"
+			(.toLowerCase name) "/advanced"))
+	inventory (x/select-node
+		   b "html/body/div/div[1]/div/div[1]/div/div[1]/div/div[1]/div")]
+    (reduce
+     (fn [inv div]
+       (assoc inv
+	 (keyword ((div :attrs) :data-type))
+	 (((x/select-node
+	    div "div/div/div/a") :attrs) :data-item)))
+     {}
+     (inventory :content))))
+
+(defn character-broken [region server name]
+  (let [response (c/get ;(c/GET 
+		  (str "http://" region 
+			     ".battle.net/wow/en/character/"
+			     (.toLowerCase server) "/"
+			     (.toLowerCase name) "/advanced"))]
+    ;(c/await response)
+    (let [xmlstream (java.io.ByteArrayInputStream. (.getBytes (response :body))) ; (c/string response)))
+	  xmlmap (clojure.xml/parse xmlstream)
+	  body (first (filter #(= (% :tag) :body) (xmlmap :content)))
+	  div-wrapper (first (filter #(= (% :tag) :div) (body :content)))
+	  div-content (first (filter #(and (= (% :tag) :div) 
+					   (= ((% :attrs) :id) "content"))
+				     (div-wrapper :content)))
+	  div-content-top (first (filter #(and (= (% :tag) :div) 
+					       (= ((% :attrs) :class) "content-top"))
+				     (div-content :content)))
+	  div-content-bot (first (filter #(and (= (% :tag) :div) 
+					       (= ((% :attrs) :class) "content-bot"))
+				     (div-content-top :content)))
+	  div-profile-wrapper (first (filter #(and (= (% :tag) :div) 
+					   (= ((% :attrs) :id) "profile-wrapper"))
+				     (div-content-bot :content)))
+	  ; for char dets
+	  div-p-s-a (first (filter #(and (= (% :tag) :div) 
+					   (= ((% :attrs) :class) 
+					      "profile-sidebar-anchor"))
+				     (div-profile-wrapper :content)))
+	  div-p-s-o (first (filter #(and (= (% :tag) :div) 
+					   (= ((% :attrs) :class) 
+					      "profile-sidebar-outer"))
+				     (div-p-s-a :content)))
+	  div-p-s-i (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class) 
+					    "profile-sidebar-inner"))
+				     (div-p-s-o :content)))
+	  div-p-s-c (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class) 
+					    "profile-sidebar-contents"))
+				     (div-p-s-i :content)))
+	  div-p-i-a (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class) 
+					    "profile-info-anchor"))
+				     (div-p-s-c :content)))
+	  div-p-i (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class)
+					    "profile-info"))
+				     (div-p-i-a :content)))
+	  div-name ((first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class)
+					    "name"))
+				   (div-p-i :content))) :content)
+	  char-name (first ((first (filter #(= (% :tag) :a) div-name)) :content))
+	  div-title-guild (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class)
+					    "title-guild"))
+				     (div-p-i :content)))
+	  div-guild (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class)
+					    "guild"))
+				     (div-title-guild :content)))
+	  div-title (first (filter #(and (= (% :tag) :div) 
+					 (= ((% :attrs) :class)
+					    "title"))
+				     (div-title-guild :content)))
+	  char-title (first (div-title :content))
+	  char-guild (first ((first (filter #(= (% :tag) :a) 
+					    (div-guild :content))) :content))
+	  div-level-race-spec-class (first (filter #(re-find #"level-race-spec-class" 
+							     ((% :attrs) :class))
+						   (div-p-i :content)))
+	  span-level (first (filter #(and (= (% :tag) :span)
+					  (= ((% :attrs) :class) "level"))
+				    (div-level-race-spec-class :content)))
+	  char-level (first (span-level :content))
+	  span-race (first (filter #(and (= (% :tag) :span)
+					  (= ((% :attrs) :class) "race"))
+				    (div-level-race-spec-class :content)))
+	  char-race (first (span-race :content))
+	  a-spec (first (filter #(and (= (% :tag) :a)
+				      (= ((% :attrs) :class) "spec tip"))
+				(div-level-race-spec-class :content)))
+	  char-spec (first (a-spec :content))
+	  span-class (first (filter #(and (= (% :tag) :span)
+					  (= ((% :attrs) :class) "class"))
+				    (div-level-race-spec-class :content)))
+	  char-class (first (span-class :content))
+	  span-realm (first (filter #(and (= (% :tag) :span)
+					  (= ((% :attrs) :class) "realm tip"))
+				    (div-level-race-spec-class :content)))
+	  char-realm (first (span-realm :content))
+	  ; for invent
+	  div-profile-contents (first (filter #(and (= (% :tag) :div) 
+					       (= ((% :attrs) :class) "profile-contents"))
+				     (div-profile-wrapper :content)))
+	  div-summary-top (first (filter #(and (= (% :tag) :div) 
+					       (= ((% :attrs) :class) "summary-top"))
+				     (div-profile-contents :content)))
+	  div-summary-top-inv (first (filter #(and (= (% :tag) :div) 
+					       (= ((% :attrs) :class) 
+						  "summary-top-inventory"))
+				     (div-summary-top :content)))
+	  div-summary-inv (first (filter #(and (= (% :tag) :div) 
+					   (= ((% :attrs) :id) "summary-inventory"))
+				     (div-summary-top-inv :content)))
+	  inventory (reduce ; get item ids
+		     (fn [m div]
+		       (assoc m
+			 (keyword ((div :attrs) :data-id))
+			 (let [slot-inner (first (filter #(and (= (% :tag) :div) 
+							       (= ((% :attrs) :class) 
+								  "slot-inner"))
+							 (div :content)))
+			       slot-contents (first (filter #(and (= (% :tag) :div) 
+								  (= ((% :attrs) :class) 
+								     "slot-contents"))
+							    (slot-inner :content)))
+			       a (first (filter #(and (= (% :tag) :a) 
+						      (= ((% :attrs) :class) 
+							 "item"))
+						(slot-contents :content)))
+			       item-data ((a :attrs) :data-item)
+			       item-data (re/re-split #"&|=" item-data)]
+			   (apply hash-map item-data))))
+		     {}
+		     (div-summary-inv :content))]
+      (println div-level-race-spec-class)
+      {:profile {:name char-name
+		 :title char-title
+		 :guild char-guild
+		 :level char-level
+		 :race char-race
+		 :spec char-spec
+		 :realm (.trim char-realm)
+		 :class char-class}
+       :inventory inventory})))
