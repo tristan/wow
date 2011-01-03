@@ -157,41 +157,16 @@
 				       })
 				   :else
 				   m) ; nothing else with no attrs is interesting
-			     (not (nil? ((n :attrs) :class)))
-			     (cond (= "color-tooltip-green" ((n :attrs) :class))
-				   (assoc m :heroic "1")
-				   (= "color-q2" ((n :attrs) :class))
-				   (let [spellData (or (m :spellData) [])
-					 s (apply str
-						  ((x/select-node
-						    n "li/span") :content))
-					 s (apply str (map #(.trim %) 
-							   (re/re-split #"\n" s)))
-					 s (re-find #"^([\w]+):(.+)$" s)]
-				     (assoc m :spellData ; TODO: fix results from 30318
-					    (conj spellData {:trigger
-							     (if (= (second s) "Equip")
-							       1 0)
-							     :desc (last s)})))
-				   (re-find #"Socket" (apply str (n :content)))
-				   (let [cnt (apply str (n :content))
-					 sockets (or (m :sockets) [])]
-				     (if (re-find #"Socket Bonus" cnt)
-				       (let [bonus (re-find #"\+([\d]+) ([\w ]+)" cnt)]
-					 (assoc m 
-					   :socketBonus
-					   {:stat (last bonus)
-					    :value (second bonus)}))
-				       (let [colour (re-find #"([\w]+) Socket" cnt)]
-					 (assoc m
-					   :sockets (conj sockets (last colour))))))
-				   :else
-				   m)
 			     (and (not (nil? ((n :attrs) :id)))
-				  (re-find #"stat-[\d]+" ((n :attrs) :id)))
+				  (re-find #"stat\-[\d]+" ((n :attrs) :id)))
 			     (let [id ((n :attrs) :id)
 				   v (x/select-node-content
-				      n "li/span")]
+				      n "li/span")
+				   v (try
+				      (Integer/parseInt v)
+				      (catch Exception e
+					v))
+				   ]
 			       (cond (= id "stat-49")
 				     (assoc m :bonusMasteryRating v)
 				     (= id "stat-45")
@@ -222,10 +197,76 @@
 				     (assoc m :bonusAgility v)
 				     :else ; unknown stat, skip it
 				     m))
+			     (not (nil? ((n :attrs) :class)))
+			     (cond (= "color-tooltip-green" ((n :attrs) :class))
+				   (assoc m :heroic "1")
+				   (= "color-q2" ((n :attrs) :class))
+				   (let [spellData (or (m :spellData) [])
+					 s (apply str
+						  ((x/select-node
+						    n "li/span") :content))
+					 s (apply str (map #(.trim %) 
+							   (re/re-split #"\n" s)))
+					 s (re-find #"^([\w]+):(.+)$" s)]
+				     (assoc m :spellData ; TODO: fix results from 30318
+					    (conj spellData {:trigger
+							     (if (= (second s) "Equip")
+							       1 0)
+							     :desc (last s)})))
+				   (re-find #"Socket" (apply str (n :content)))
+				   (let [cnt (apply str (n :content))
+					 sockets (or (m :sockets) [])]
+				     (if (re-find #"Socket Bonus" cnt)
+				       (let [bonus (re-find #"\+([\d]+) ([\w ]+)" cnt)
+					     stat (last bonus)
+					     value (second bonus)
+					     value (try
+						    (Integer/parseInt value)
+						    (catch Exception e
+						      value))]
+					 (assoc m 
+					   :socketBonus
+					   {(cond (= stat "Hit Rating")
+						  :bonusHitRating
+						  (= stat "Mastery Rating")
+						  :bonusMasteryRating
+						  (= stat "Spell Power")
+						  :bonusSpellPower
+						  (= stat "Expertise Rating")
+						  :bonusExpretiseRating
+						  (= stat "Haste Rating")
+						  :bonusHasteRating
+						  (= stat "Resilience Rating")
+						  :bonusResilienceRating
+						  (= stat "Critical Strike Rating")
+						  :bonusCritRating
+						  (= stat "Parry Rating")
+						  :bonusParryRating
+						  (= stat "Dodge Rating")
+						  :bonusDodgeRating
+						  (= stat "Stamina")
+						  :bonusStamina
+						  (= stat "Spirit")
+						  :bonusSpirit
+						  (= stat "Intellect")
+						  :bonusIntellect
+						  (= stat "Strength")
+						  :bonusStrength
+						  (= stat "Agility")
+						  :bonusAgility
+						  :else
+						  stat) ; no idea what it is
+					    value}))
+				       (let [colour (re-find #"([\w]+) Socket" cnt)]
+					 (assoc m
+					   :sockets (conj sockets (last colour))))))
+				   :else
+				   m)
 			     :else
 			     m))
 		     item (item-specs-node :content))
 	;TODO: :itemSource
+	blah (comment
 	item
 	(if (= (((x/select-node content-node "div/div[1]/div[1]") :attrs) :id)
 	       "location-dropCreatures")
@@ -245,7 +286,7 @@
 	    (assoc item 
 	      :dropLocations drop-locations
 	      :dropCreatures drop-creatures))
-	  item)
+	  item))
       	]
     item))
 
