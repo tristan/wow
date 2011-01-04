@@ -11,7 +11,7 @@
       :6 [67150] ; legs
       :7 [62385] ; feet
       :8 [56340] ; wrist
-      :9 [58125] ; hands
+      :9 [58125 56268] ; hands
       :10 [62362] ; ring1
       :11 [62348] ; ring2
       :12 [56394] ; trinket1
@@ -99,7 +99,7 @@
       true
       (in? (rest coll) x))))
 
-(defn build-options [item weights gems]
+(defn build-item-options [item weights gems]
   ; only interested in the stats that are listed in the weights
   (let [base-stats (reduce (fn [i k]
 			     (assoc i
@@ -143,7 +143,8 @@
 	(apply concat
 	       (for [g gem-options]
 		 (for [r reforge-options]
-		   {:gems (g :gems)
+		   {:id (item :id)
+		    :gems (g :gems)
 		    :reforge (r :reforge)
 		    :stats (reduce combine-stats base-stats [(g :stats) (r :stats)])})))
 	]
@@ -151,5 +152,62 @@
    combined-options)
 )
 
+(defn add-option [options option]
+  (print ".")
+  (assoc options
+    :items (assoc (options :items)
+	     (option :slot)
+	     {:id (option :id)
+	      :gems (option :gems)
+	      :reforge (option :reforge)})
+    :stats (combine-stats (options :stats)
+			  (option :stats))))
+  
+
+(defn calculate-option-leaves [options]
+  "pass in all the slot options and recursivly add them together"
+  (if (empty? (rest options))
+    (map #(add-option {:items {} :stats {}} %) (val (first options)))
+    (apply concat
+    (for [i (val (first options))]
+      (for [j (calculate-option-leaves (rest options))]
+	(add-option i j))))))
+
+(defn brute-force-all-options [data weights gems]
+  "brute force options creater. will run forever (or until you run out of memory)"
+   (let [all-options
+	 (reduce (fn [m e]
+		   (assoc m
+		     (key e)
+		     (vec 
+		      (apply 
+		       concat
+		       (for [i (val e)]
+			 (let [o (build-item-options i weights gems)]
+			   (map #(assoc %
+				   :slot (key e)) o)))))))
+		 {}
+		 data)]
+     (println "generating"
+	      (reduce #(* %1 (count %2)) 1 (remove #(= (count %) 0) (vals all-options)))
+	      "options")
+     (calculate-option-leaves (seq all-options))))
+
+(defn test-stuff [options]
+  "simplistic development function for the calculate-option-leaves function"
+  (if (empty? (rest options))
+    (map vector (val (first options)))
+    (apply concat
+    (for [i (val (first options))]
+      (for [j (test-stuff (rest options))]
+	(cons i j))))))
+
+(defn run-test-stuff []
+  (test-stuff (seq {:a [1 2 3 4]
+		    :b [:a :b :c :d]
+		    :c ['e 'f 'g 'h]
+		    :d ["h" "i" "j" "k"]
+		    })))
+
 (defn run-test []
-  (build-options {:requiredLevel "85", :quality "3", :icon "inv_shoulder_mail_dungeonmail_c_04", :name "Wrap of the Valley Glades", :sockets ["Yellow"], :itemLevel "346", :bonusHitRating 130, :classId "4", :bonding "Binds when picked up", :armor "1741", :socketBonus {:bonusHitRating 10}, :bonusHasteRating 150, :bonusStamina 337, :invType "3", :id 58124, :bonusAgility 205, :subclassId "3"} stat-weights-enhance enhance-gems))
+  (build-all-options resolved-test-data stat-weights-enhance enhance-gems))
