@@ -5,18 +5,30 @@
     <link rel="stylesheet" href="style/main.css" type="text/css">
   </head>
   <body>
-    <div id="account"></div>
-    <div style="clear: both;"></div>
-    <div id="character"><p>None!</p></div>
-    <div id="sidebar"><p>Nothing!</p></div>
+    <table id="character">
+      <tr><td>Head:</td><td><div id="slot-head" class="slot"></div></td></tr>
+      <tr><td>Neck:</td><td><div id="slot-neck" class="slot"></div></td></tr>
+      <tr><td>Back:</td><td><div id="slot-back" class="slot"></div></td></tr>
+      <tr><td>Sholder:</td><td><div id="slot-sholder" class="slot"></div></td></tr>
+      <tr><td>Chest:</td><td><div id="slot-chest" class="slot"></div></td></tr>
+      <tr><td>Wrists:</td><td><div id="slot-wrists" class="slot"></div></td></tr>
+      <tr><td>Hands:</td><td><div id="slot-hands" class="slot"></div></td></tr>
+      <tr><td>Belt:</td><td><div id="slot-belt" class="slot"></div></td></tr>
+      <tr><td>Legs:</td><td><div id="slot-legs" class="slot"></div></td></tr>
+      <tr><td>Feet:</td><td><div id="slot-feet" class="slot"></div></td></tr>
+      <tr><td>Ring:</td><td><div id="slot-ring1" class="slot"></div></td></tr>
+      <tr><td>Ring:</td><td><div id="slot-ring2" class="slot"></div></td></tr>
+      <tr><td>Trinket:</td><td><div id="slot-trinket1" class="slot"></div></td></tr>
+      <tr><td>Trinket:</td><td><div id="slot-trinket2" class="slot"></div></td></tr>
+      <tr><td>Main Hand:</td><td><div id="slot-mh" class="slot"></div></td></tr>
+      <tr><td>Off Hand:</td><td><div id="slot-oh" class="slot"></div></td></tr>
+      <tr><td>Ranged:</td><td><div id="slot-ranged" class="slot"></div></td></tr>
+    </div>
   </body>
   <script src="vendor/couchapp/loader.js"></script>
   <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
-      $("#account").evently("account", app)
-      $("#character").evently("character", app);
-      $("#sidebar").evently("choices", app);
-	  $.evently.connect("#sidebar", "#character", ["characters"]);
+        $(".slot").evently("items", app);
     });
   </script>
 </html>
