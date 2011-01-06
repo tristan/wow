@@ -1,1 +1,91 @@
 /* add styles here */
+
+
+/* socket icons */
+.icon-socket { display: block; position: relative; width: 15px; height: 15px; }
+.icon-socket a.gem { display: block; width: 15px; height: 15px; }
+.icon-socket a.gem img { display: block; width: 13px; height: 13px; padding: 1px 0 0 1px; }
+.icon-socket .empty { position: absolute; left: 1px; top: 1px; width: 13px; height: 13px; }
+.icon-socket .frame { position: absolute; left: 0; top: 0; width: 15px; height: 15px; background: url("../images/icons/frames/sockets.png") no-repeat; }
+.icon-socket.socket-Meta  .empty { background-color: #29292a; } /* Meta */
+.icon-socket.socket-Red  .empty { background-color: #301010; } /* Red */
+.icon-socket.socket-Yellow  .empty { background-color: #403010; } /* Yellow */
+.icon-socket.socket-Blue  .empty { background-color: #102040; } /* Blue */
+.icon-socket.socket-Prismatic .empty { background-color: #29292a; } /* Prismatic */
+.icon-socket.socket-Hydraulic .empty { background-color: red; }     /* Hydraulic */
+.icon-socket.socket-Cogwheel .empty { background-color: #29292a; } /* Cogwheel */
+.icon-socket.socket-Meta  .frame { background-position:  -45px   0; } /* Meta */
+.icon-socket.socket-Red  .frame { background-position:      0   0; } /* Red */
+.icon-socket.socket-Yellow  .frame { background-position:  -15px   0; } /* Yellow */
+.icon-socket.socket-Blue  .frame { background-position:  -30px   0; } /* Blue */
+.icon-socket.socket-Orange  .frame { background-position:  -90px   0; } /* Orange */
+.icon-socket.socket-Purple .frame { background-position:  -75px   0; } /* Purple */
+.icon-socket.socket-Green .frame { background-position: -105px   0; } /* Green */
+.icon-socket.socket-Prismatic .frame { background-position:  -60px   0; } /* Prismatic */
+.icon-socket.socket-Hydraulic .frame { background-position:      0   0; } /* Hydraulic */
+.icon-socket.socket-Cogwheel .frame { background-position:  -45px   0; } /* Cogwheel */
+
+/* inventory (shared) */
+/*.summary-inventory*/ .slot { position: absolute; }
+.summary-inventory a.item { width: 49px; height: 49px; display: block; position: absolute; }
+.summary-inventory a.item img { display: block; width: 44px; height: 44px; padding: 3px 0 0 3px; }
+.summary-inventory a.item:hover .frame { background-color: rgba(255, 255, 255, 0.2); }
+.summary-inventory a.empty { width: 49px; height: 49px; display: block; cursor: help; position: absolute; background: url("../images/character/summary/item-empty-bg.png") no-repeat; opacity: 0.33333; }
+.summary-inventory a.empty:hover { opacity: 0.66666; }
+.summary-inventory a.item .frame, .summary-inventory a.empty .frame { position: absolute; left: 0; top: 0; width: 49px; height: 49px; background: url("../images/icons/frames/inventory-slots.png") no-repeat; }
+.summary-inventory .slot,
+.summary-inventory a.item,
+.summary-inventory a.item .frame,
+.summary-inventory a.empty { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
+
+/* empty slots */
+.summary-inventory .slot-1  a.empty { background-position: 1px 1px;    } /* Head */
+.summary-inventory .slot-2  a.empty { background-position: 1px -46px;  } /* Neck */
+.summary-inventory .slot-3  a.empty { background-position: 1px -93px;  } /* Shoulder */
+.summary-inventory .slot-16 a.empty,                                     /* Back */
+.summary-inventory .slot-5  a.empty { background-position: 1px -140px; } /* Chest */
+.summary-inventory .slot-19 a.empty { background-position: 1px -187px; } /* Tabard */
+.summary-inventory .slot-4  a.empty { background-position: 1px -234px; } /* Shirt */
+.summary-inventory .slot-9  a.empty { background-position: 1px -281px; } /* Wrist */
+.summary-inventory .slot-10 a.empty { background-position: 1px -328px; } /* Hands */
+.summary-inventory .slot-6  a.empty { background-position: 1px -375px; } /* Waist */
+.summary-inventory .slot-7  a.empty { background-position: 1px -422px; } /* Legs */
+.summary-inventory .slot-8  a.empty { background-position: 1px -469px; } /* Feet */
+.summary-inventory .slot-11 a.empty { background-position: 1px -516px; } /* Finger */
+.summary-inventory .slot-12 a.empty { background-position: 1px -563px; } /* Trinket */
+.summary-inventory .slot-21 a.empty { background-position: 1px -610px; } /* Main Hand */
+.summary-inventory .slot-22 a.empty { background-position: 1px -657px; } /* Off Hand */
+.summary-inventory .slot-15 a.empty { background-position: 1px -704px; } /* Ranged */
+.summary-inventory .slot-28 a.empty { background-position: 1px -751px; } /* Relic */
+
+/* item quality frames */
+.summary-inventory .item-quality-0 a.item .frame { background-position: -49px  0; }
+.summary-inventory .item-quality-1 a.item .frame { background-position: -98px  0; }
+.summary-inventory .item-quality-2 a.item .frame { background-position: -147px 0; }
+.summary-inventory .item-quality-3 a.item .frame { background-position: -196px 0; }
+.summary-inventory .item-quality-4 a.item .frame { background-position: -245px 0; }
+.summary-inventory .item-quality-5 a.item .frame { background-position: -294px 0; }
+.summary-inventory .item-quality-6 a.item .frame { background-position: -343px 0; }
+.summary-inventory .item-quality-7 a.item .frame { background-position: -392px 0; }
+
+/* inventory (advanced) */
+.summary-inventory-advanced { width: 807px; height: 521px; /*position: absolute; left: -45px; top: -2px;*/ }
+.summary-inventory-advanced .slot-inner { 
+    width: 265px; height: 57px; 
+    background: url("../images/character/summary/item-slot-advanced-bg.png") left top repeat-y; }
+.summary-inventory-advanced .slot-highlight .slot-inner { background-position: left bottom; }
+.summary-inventory-advanced .details { position: absolute; width: 204px; height: 49px; left: 57px; top: 4px; white-space: nowrap;  }
+.summary-inventory-advanced a.item,
+.summary-inventory-advanced a.empty { position: absolute; left: 4px; top: 4px; }
+.summary-inventory-advanced a.empty { opacity: 0.25; }
+.summary-inventory-advanced .name, .summary-inventory-advanced .name-shadow { position: absolute; font-size: 11px; }
+.summary-inventory-advanced .name { left: 0; top: -2px; }
+.summary-inventory-advanced .name-shadow { left: 1px; top: -1px; color: black; }
+.summary-inventory-advanced .audit-warning { line-height: 10px; cursor: default; display: inline-block; background: url("../../images/icons/warning-small.png") right center no-repeat; width: 10px; height: 10px; margin-left: 5px; position: relative; top: 1px; cursor: help; }
+.summary-inventory-advanced .enchant, .summary-inventory-advanced .enchant-shadow { position: absolute; font-size: 11px; }
+.summary-inventory-advanced .enchant { left: 0; top: 12px; color: #0f0; }
+.summary-inventory-advanced .enchant .tip { border-bottom: 0; }
+.summary-inventory-advanced .enchant-shadow { left: 1px; top: 13px; color: black; }
+.summary-inventory-advanced .level { position: absolute; left: 0; bottom: -2px; color: #999999; width: 20px; height: 16px; line-height: 16px; font-size: 10px; }
+.summary-inventory-advanced .sockets { position: absolute; left: 27px; bottom: 1px; }
+.summary-inventory-advanced .sockets .icon-socket { float: left; margin-right: 4px; }

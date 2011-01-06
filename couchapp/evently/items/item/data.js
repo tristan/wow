@@ -1,16 +1,29 @@
-function(data) {
-    $.log(data);
+function(data, evt) {
+    $.log("called data");
     if (data.rows.length > 0) {
 	var item = data.rows[0].value;
 	return item;
     } else {
-	setTimeout(function() {
-		       $.log("checking item again!");
-		       //$.log($(evt.target).children("input").val());
-		       //$(evt).trigger("getItem", evt.target);
-		   }, 1000);
+	var itemid = $$(this).itemid;
+	$.log("didn't find: " + itemid);
+	var ireq = {
+	    id: itemid,
+	    type: "item",
+	    _id: "item-" + itemid
+	};
+	$$(this).app.db.saveDoc(ireq, {
+				    success : function() {
+					$.log("success");
+				    },
+				    error : function(e) {
+					if (e == 409) {
+					    $.log("item already requested");
+					}
+				    }
+				});
 	return {
-	    id: false
+	    name: false,
+	    id: itemid
 	};
     }
 }

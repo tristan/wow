@@ -1,6 +1,7 @@
-function() {
+function(evt) {
+    $.log("called query");
     return {
 	view: "items",
-	key: parseInt($$(this).itemid)
+	key: $$(this).itemid
     };
 }

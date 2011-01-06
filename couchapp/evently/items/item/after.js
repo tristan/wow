@@ -1,0 +1,11 @@
+function(data) {
+    $.log("called after");
+    if (data.rows.length == 0) {
+	var itemid = $$(this).itemid;
+	var element = this;
+	setTimeout(function() {
+		       $.log("checking for item " + itemid + " again!");
+		       $(element).trigger("getItem", itemid);
+		   }, 5000);
+    }
+}

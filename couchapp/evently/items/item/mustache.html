@@ -1,6 +1,32 @@
-{{#id}}
-  <b>{{name}}</b>
-{{/id}}
-{{^id}}
-  <b>Loading...</b>
-{{/id}}
+{{#name}}
+<div class="slot-inner">
+  <div class="slot-contents">
+    <a href="http://us.battle.net/wow/en/item/{{id}}" 
+       class="item" 
+       data-item="i=56298&amp;e=4209&amp;g0=1809&amp;g1=1763&amp;re=168&amp;s=824523008">
+      <img src="/wow/icons%2F56/{{icon}}.jpg" alt="" />
+      <span class="frame"></span>
+    </a>
+    <div class="details">
+      <span class="name color-q3">
+	<a href="http://us.battle.net/wow/en/item/{{id}}">{{name}}</a>
+      </span>
+      <div class="enchant color-q2">
+	...
+      </div>
+      <span class="level">{{itemLevel}}</span>
+      <span class="sockets">
+	{{#sockets}}
+	<span class="icon-socket socket-{{.}}">
+	  <span class="empty"></span>
+	  <span class="frame"></span>
+	</span>
+	{{/sockets}}
+      </span>
+    </div>
+  </div>
+</div>
+{{/name}}
+{{^name}}
+  <b>Loading...</b><input type="hidden" value="{{id}}"/>
+{{/name}}
