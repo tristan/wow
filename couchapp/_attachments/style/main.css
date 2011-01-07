@@ -1,8 +1,11 @@
 /* add styles here */
 
-body {
-    margin: 0px;
-}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+em, img, strong, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; }
+
+html, body { height: 100%; font: normal 12px/1.3 "Lucida Sans Unicode", Arial, Helvetica, sans-serif; }
+
+a { outline: none; text-decoration: none; }
 
 /* inventory */
 .inventory {
@@ -32,10 +35,13 @@ body {
     float: left;
 }
 
-.inventory .slot a.empty {
+.inventory .slot a.item, .inventory .slot a.empty {
     width: 49px; height: 49px;
     cursor: help;
     display: block;
+}
+
+.inventory .slot a.empty {
     background: url("../images/character/summary/item-empty-bg.png") no-repeat; opacity: 0.33333;
 }
 
@@ -67,6 +73,11 @@ body {
     background: url("../images/icons/frames/inventory-slots.png") no-repeat; 
 }
 
+.inventory a.item .frame {
+    top: -47px;
+    position: relative;
+}
+
 /*.inventory a.empty { 
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px; 
@@ -79,6 +90,49 @@ body {
 
 .inventory a.empty:hover { 
     opacity: 0.66666; 
+}
+
+.inventory .left-slots a.item {
+    float: left;
+}
+
+.inventory .right-slots a.item {
+    float: right;
+}
+
+.inventory a.item img {
+    width: 44px;
+    height: 44px;
+    display: block;
+    padding: 3px 0 0 3px;
+}
+
+.inventory div.details {
+    width: 206px;
+}
+
+.inventory .left-slots div.details {
+    margin-left: 2px;
+    float: left;
+}
+
+.inventory .right-slots div.details {
+    margin-right: 2px;
+    float: right;
+}
+
+.inventory div.details:after {
+    clear: both;
+}
+
+.inventory span.stats-white {
+    color: white;
+    font-size: 75%;
+}
+
+.inventory span.stats-green {
+    color: #1eff00;
+    font-size: 75%;
 }
 
 /* empty slots */
@@ -129,3 +183,35 @@ body {
 .icon-socket.socket-Hydraulic .frame { background-position:      0   0; } /* Hydraulic */
 .icon-socket.socket-Cogwheel .frame { background-position:  -45px   0; } /* Cogwheel */
 
+/* item colors */
+.inventory .item-quality-0 span.name a { color: #9d9d9d; }
+.inventory .item-quality-1 span.name a { color: #ffffff; }
+.inventory .item-quality-2 span.name a { color: #1eff00; }
+.inventory .item-quality-3 span.name a { color: #0070dd; }
+.inventory .item-quality-4 span.name a { color: #a335ee; }
+.inventory .item-quality-5 span.name a { color: #ff8000; }
+.inventory .item-quality-6 span.name a { color: #e5cc80; }
+.inventory .item-quality-7 span.name a { color: #e5cc80; }
+
+/* item select dialog */
+
+.item-select-dialog-outer {
+    height: 1px;
+    width: 1px;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+}
+
+.item-select-dialog {
+    position: absolute;
+    margin: 0 auto;
+    left: -200px;
+    top: -100px;
+    width: 370px;
+    height: 170px;
+    background-color: black;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}

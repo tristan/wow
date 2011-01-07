@@ -1,16 +1,35 @@
 {{#name}}
 <div class="slot-inner">
   <div class="slot-contents">
-    <a href="http://us.battle.net/wow/en/item/{{id}}" 
-       class="item" 
-       data-item="i=56298&amp;e=4209&amp;g0=1809&amp;g1=1763&amp;re=168&amp;s=824523008">
-      <img src="/wow/icons%2F56/{{icon}}.jpg" alt="" />
+    <a href="javascript:;" 
+       class="item">
+      <img src="/wow/icons%2F56/{{icon}}.jpg" alt=""/>
       <span class="frame"></span>
     </a>
+    
     <div class="details">
-      <span class="name color-q3">
+      <span class="name">
 	<a href="http://us.battle.net/wow/en/item/{{id}}">{{name}}</a>
+      </span><br/>
+      <span class="stats-white">
+	{{#bonusStamina}}Stamina: +{{bonusStamina}}&nbsp;{{/bonusStamina}}
+	{{#bonusStrength}}Strength: +{{bonusStrength}}&nbsp;{{/bonusStrength}}
+	{{#bonusAgility}}Agility: +{{bonusAgility}}&nbsp;{{/bonusAgility}}
+	{{#bonusIntellect}}Intellect: +{{bonusIntellect}}&nbsp;{{/bonusIntellect}}
+	{{#bonusSpirit}}Spirit: +{{bonusSpirit}}&nbsp;{{/bonusSpirit}}
+      </span><br/>
+      <span class="stats-green">
+	{{#bonusMasteryRating}}Mastery Rating: +{{bonusMasteryRating}}&nbsp;{{/bonusMasteryRating}}
+	{{#bonusCritRating}}Critical Strike Rating: +{{bonusCritRating}}&nbsp;{{/bonusCritRating}}
+	{{#bonusHasteRating}}Haste Rating: +{{bonusHasteRating}}&nbsp;{{/bonusHasteRating}}
+	{{#bonusHitRating}}Hit Rating: +{{bonusHitRating}}&nbsp;{{/bonusHitRating}}
+	{{#bonusExpertiseRating}}Expertise Rating: +{{bonusExpertiseRating}}&nbsp;{{/bonusExpertiseRating}}
+	{{#bonusDodgeRating}}Dodge Rating: +{{bonusDodgeRating}}&nbsp;{{/bonusDodgeRating}}
+	{{#bonusParryRating}}Parry Rating: +{{bonusParryRating}}&nbsp;{{/bonusParryRating}}
+	{{#bonusSpellPower}}Spell Power: +{{bonusSpellPower}}&nbsp;{{/bonusSpellPower}}
+	{{#bonusResilienceRating}}Resilience Rating: +{{bonusResilienceRating}}&nbsp;{{/bonusResilienceRating}}
       </span>
+      <!--
       <div class="enchant color-q2">
 	...
       </div>
@@ -22,7 +41,7 @@
 	  <span class="frame"></span>
 	</span>
 	{{/sockets}}
-      </span>
+      </span> -->
     </div>
   </div>
 </div>

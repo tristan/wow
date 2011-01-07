@@ -7,5 +7,9 @@ function(data) {
 		       $.log("checking for item " + itemid + " again!");
 		       $(element).trigger("getItem", itemid);
 		   }, 5000);
+    } else {
+	// set styles
+	var item = data.rows[0].value;
+	$(this).addClass("item-quality-" + item.quality);
     }
 }
