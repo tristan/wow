@@ -1,18 +1,64 @@
 /* add styles here */
 
+body {
+    margin: 0px;
+}
+
 /* inventory */
-.inventory .slot {}
+.inventory {
+    width: 810px;
+    /*background: url("../images/character/summary/backgrounds/race/8-0-in.jpg") no-repeat;*/
+}
+
+.inventory .right-slots {
+    float: right;
+}
+
+.inventory .bottom-slots {
+    clear: both;
+}
+
+.inventory .bottom-slots .slot {
+    float: left;   
+}
+
+.stats {
+    float: left;
+    width: 263px; height: 460px;
+    border: 1px solid black;
+}
+
+.inventory .left-slots {
+    float: left;
+}
+
 .inventory .slot a.empty {
     width: 49px; height: 49px;
     cursor: help;
     display: block;
     background: url("../images/character/summary/item-empty-bg.png") no-repeat; opacity: 0.33333;
 }
+
 .inventory .slot-contents {
     padding-top: 4px;
     padding-left: 4px;
 }
-.inventory .slot-inner { width: 265px; height: 57px; background: url("../images/character/summary/item-slot-advanced-bg.png") left top repeat-y; margin-bottom: 1px; }
+
+.inventory .slot-right a { 
+    float: right;
+    padding-right: 4px; 
+}
+.inventory .slot-right a:after {
+    clear: both;
+}
+
+.inventory .slot-inner { 
+    width: 265px; 
+    height: 57px;
+    background: url("../images/character/summary/item-slot-advanced-bg.png") left top repeat-y; margin-bottom: 1px;
+}
+
+.inventory .slot-right .slot-inner { background-position: right top; text-align: right; }
 
 .inventory .frame { 
     width: 49px; 
