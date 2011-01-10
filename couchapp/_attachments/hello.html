@@ -6,59 +6,53 @@
   </head>
   <body>
     <div class="inventory">
-      <div class="left-slots">
-	<div class="slot slot-1">
+      <table>
+	<thead>
+	  <tr>
+	    <th>Slot</th><th>Item</th><th>Stats</th>
+	    <th>Reforge</th><th>to</th><th>Gems</th><th>Enchant</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr id="main-hand" class="slot"></tr>
+	  <tr id="off-hand" class="slot"></tr>
+	  <tr id="ranged" class="slot"></tr>
+	  <tr id="head" class="slot"></tr>
+	  <tr id="neck" class="slot"></tr>
+	  <tr id="sholders" class="slot"></tr>
+	  <tr id="back" class="slot"></tr>
+	  <tr id="chest" class="slot"></tr>
+	  <tr id="wrists" class="slot"></tr>
+	  <tr id="hands" class="slot"></tr>
+	  <tr id="waist" class="slot"></tr>
+	  <tr id="legs" class="slot"></tr>
+	  <tr id="feet" class="slot"></tr>
+	  <tr id="ring1" class="slot"></tr>
+	  <tr id="ring2" class="slot"></tr>
+	  <tr id="trinket1" class="slot"></tr>
+	  <tr id="trinket2" class="slot"></tr>
+	</tbody>
+      </table>
+    </div>
+    <div class="item-search" style="display: none;">
+      <div class="item-search-box">
+	<div class="item-search-inner">
+	  <div class="item-search-input">
+	  </div>
+	  <div class="item-search-results">
+	  </div>
 	</div>
-	<div class="slot slot-2">
-	</div>
-	<div class="slot slot-3">
-	</div>
-	<div class="slot slot-16">
-	</div>
-	<div class="slot slot-5">
-	</div>
-	<div class="slot slot-4">
-	</div>
-	<div class="slot slot-19">
-	</div>
-	<div class="slot slot-9">
-	</div>
-      </div>
-      <div class="stats">
-      </div>
-      <div class="right-slots">
-	<div class="slot slot-right slot-10">
-	</div>
-	<div class="slot slot-right slot-6">
-	</div>
-	<div class="slot slot-right slot-7">
-	</div>
-	<div class="slot slot-right slot-8">
-	</div>
-	<div class="slot slot-right slot-11">
-	</div>
-	<div class="slot slot-right slot-11">
-	</div>
-	<div class="slot slot-right slot-12">
-	</div>
-	<div class="slot slot-right slot-12">
-	</div>
-      </div>
-      <div class="bottom-slots">
-	<div class="slot slot-21 slot-right">
-	</div>
-	<div class="slot slot-12">
-	</div>
-	<div class="slot slot-15">
-	</div>
-	<div style="clear: both;"></div>
       </div>
     </div>
   </body>
   <script src="vendor/couchapp/loader.js"></script>
   <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
-        $(".slot").evently("items", app);
+        $("tr.slot").evently("items", app);
+        $(".item-search-input").evently("search", app);
+        $(".item-search-results").evently("searchResults", app);
+        $.evently.connect(".item-search-input", 
+                          ".item-search-results", ["addSearchResults"]);
     });
   </script>
 </html>

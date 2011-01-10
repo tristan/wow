@@ -51,9 +51,9 @@
   ;(e.g. ({:tag :page :index 0} {:tag :itemTooltips :index 0} {:tag :itemTooltip :index 1}))
   (let [path (map
 	      (fn [node]
-		{:tag (keyword (first (re/re-split #"\[([\d]+)\]" node)))
+		{:tag (keyword (first (re/re-split #"\[([-\d]+)\]" node)))
 		 :index
-		 (let [index (re-find #"\[([\d]+)\]" node)]
+		 (let [index (re-find #"\[([-\d]+)\]" node)]
 		   (if (nil? index)
 		     0
 		     (Integer/parseInt (last index))))})
@@ -69,10 +69,14 @@
     (let [f (filter #(= (% :tag) ((first path) :tag)) (remove string? (tree :content)))]
       (if (empty? f)
 	nil ; not found, return nil
-	(if (> (count f) ((first path) :index))
-	  (recur (nth f ((first path) :index))
-		 (rest path))
-	  nil))))) ; again, not found
+	(let [index ((first path) :index)
+	      index (if (> 0 index)
+		      (+ (count f) index)
+		      index)]
+	  (if (and (> index -1) (> (count f) index))
+	    (recur (nth f index)
+		   (rest path))
+	    nil)))))) ; again, not found
 
 (defn select-node-content [tree path]
   (let [node (select-node tree path)]

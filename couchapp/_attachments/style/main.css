@@ -7,133 +7,6 @@ html, body { height: 100%; font: normal 12px/1.3 "Lucida Sans Unicode", Arial, H
 
 a { outline: none; text-decoration: none; }
 
-/* inventory */
-.inventory {
-    width: 810px;
-    /*background: url("../images/character/summary/backgrounds/race/8-0-in.jpg") no-repeat;*/
-}
-
-.inventory .right-slots {
-    float: right;
-}
-
-.inventory .bottom-slots {
-    clear: both;
-}
-
-.inventory .bottom-slots .slot {
-    float: left;   
-}
-
-.stats {
-    float: left;
-    width: 263px; height: 460px;
-
-}
-
-.inventory .left-slots {
-    float: left;
-}
-
-.inventory .slot a.item, .inventory .slot a.empty {
-    width: 49px; height: 49px;
-    cursor: help;
-    display: block;
-}
-
-.inventory .slot a.empty {
-    background: url("../images/character/summary/item-empty-bg.png") no-repeat; opacity: 0.33333;
-}
-
-.inventory .slot-contents {
-    padding-top: 4px;
-    padding-left: 4px;
-}
-
-.inventory .slot-right a { 
-    float: right;
-    padding-right: 4px; 
-}
-.inventory .slot-right a:after {
-    clear: both;
-}
-
-.inventory .slot-inner { 
-    width: 265px; 
-    height: 57px;
-    background: url("../images/character/summary/item-slot-advanced-bg.png") left top repeat-y; margin-bottom: 1px;
-}
-
-.inventory .slot-right .slot-inner { background-position: right top; text-align: right; }
-
-.inventory .frame { 
-    width: 49px; 
-    height: 49px; 
-    display: block;
-    background: url("../images/icons/frames/inventory-slots.png") no-repeat; 
-}
-
-.inventory a.item .frame {
-    top: -47px;
-    position: relative;
-}
-
-/*.inventory a.empty { 
-    -moz-border-radius: 4px; 
-    -webkit-border-radius: 4px; 
-    border-radius: 4px; 
-}*/
-
-.inventory a.empty { 
-    opacity: 0.25; 
-}
-
-.inventory a.empty:hover { 
-    opacity: 0.66666; 
-}
-
-.inventory .left-slots a.item {
-    float: left;
-}
-
-.inventory .right-slots a.item {
-    float: right;
-}
-
-.inventory a.item img {
-    width: 44px;
-    height: 44px;
-    display: block;
-    padding: 3px 0 0 3px;
-}
-
-.inventory div.details {
-    width: 206px;
-}
-
-.inventory .left-slots div.details {
-    margin-left: 2px;
-    float: left;
-}
-
-.inventory .right-slots div.details {
-    margin-right: 2px;
-    float: right;
-}
-
-.inventory div.details:after {
-    clear: both;
-}
-
-.inventory span.stats-white {
-    color: white;
-    font-size: 75%;
-}
-
-.inventory span.stats-green {
-    color: #1eff00;
-    font-size: 75%;
-}
 
 /* empty slots */
 .inventory .slot-1  a.empty { background-position: 1px 1px; } /* Head */
@@ -184,18 +57,18 @@ a { outline: none; text-decoration: none; }
 .icon-socket.socket-Cogwheel .frame { background-position:  -45px   0; } /* Cogwheel */
 
 /* item colors */
-.inventory .item-quality-0 span.name a { color: #9d9d9d; }
-.inventory .item-quality-1 span.name a { color: #ffffff; }
-.inventory .item-quality-2 span.name a { color: #1eff00; }
-.inventory .item-quality-3 span.name a { color: #0070dd; }
-.inventory .item-quality-4 span.name a { color: #a335ee; }
-.inventory .item-quality-5 span.name a { color: #ff8000; }
-.inventory .item-quality-6 span.name a { color: #e5cc80; }
-.inventory .item-quality-7 span.name a { color: #e5cc80; }
+.item-quality-0 { color: #9d9d9d; }
+.item-quality-1 { color: #ffffff; }
+.item-quality-2 { color: #1eff00; }
+.item-quality-3 { color: #0070dd; }
+.item-quality-4 { color: #a335ee; }
+.item-quality-5 { color: #ff8000; }
+.item-quality-6 { color: #e5cc80; }
+.item-quality-7 { color: #e5cc80; }
 
 /* item select dialog */
 
-.item-select-dialog-outer {
+.item-search {
     height: 1px;
     width: 1px;
     left: 50%;
@@ -203,15 +76,29 @@ a { outline: none; text-decoration: none; }
     position: fixed;
 }
 
-.item-select-dialog {
+.item-search-box {
     position: absolute;
     margin: 0 auto;
-    left: -200px;
-    top: -100px;
-    width: 370px;
-    height: 170px;
-    background-color: black;
+    left: -400px;
+    top: -282px;
+    width: 800px;
+    height: 564px;
+}
+
+.item-search-inner {
+    width: 780px;
+    height: 554px;
+    background-color: #303030;
+    border: 10px solid #303030;
+}
+
+.item-search-input {
     color: white;
-    padding: 25px;
-    text-align: center;
+}
+
+.item-search-results {
+    background-color: black;
+    height: 478px;
+    overflow: auto;
+    color: white;
 }
