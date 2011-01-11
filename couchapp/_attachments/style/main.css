@@ -98,7 +98,8 @@ a { outline: none; text-decoration: none; }
 
 .item-search-results {
     background-color: black;
-    height: 478px;
+    height: 468px;
     overflow: auto;
     color: white;
+    margin-bottom: 2px;
 }

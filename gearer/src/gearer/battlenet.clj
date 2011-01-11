@@ -13,6 +13,8 @@
       xmlmap)))
 
 ; http://us.battle.net/wow/en/item/itemId
+; TODO: trinket/ring/weapon uniqueness
+; check item: 23835 (and other engineering items)
 (defn item [itemId]
   (let [b (get-xml (str "http://us.battle.net/wow/en/item/" itemId))
 	content-node (x/select-node ; class="content-bot"
@@ -88,28 +90,6 @@
 						      s))))
 					   :else
 					   m)) ; something unknown, skip it
-				   (re-find #"[\w]+-[hH]and" ; an x-handed weapon
-					    (apply str 
-						   (map #(str %) (n :content))))
-				   (assoc m 
-				     :invType
-				     (str
-				      (last (re-find #"([\w]+)-[hH]and"
-						     (apply str
-							    (map #(str %) (n :content)))))
-				      "-hand"))
-				   (re-find #"Ranged" ; a ranged weapon
-					    (apply str 
-						   (map #(str %) (n :content))))
-				   (assoc m 
-				     :invType
-				     "Ranged")
-				   (re-find #"Thrown" ; a ranged weapon
-					    (apply str 
-						   (map #(str %) (n :content))))
-				   (assoc m 
-				     :invType
-				     "Thrown")
 				   (let [lispan (x/select-node-content
 						 n "li/span")]
 				     (if (string? lispan)
@@ -145,13 +125,26 @@
 							 )}]
 				     (assoc m :damageData
 					    (conj damageData dd)))
+				   (let [lispan (x/select-node-content 
+					; the "slot" "type" row
+						 n "li/span")]
+				     (if (string? lispan)
+				       (not (= (.trim 
+						(str (x/select-node-content
+						      n "li"))) "Sell Price:"))
+				       false))
+				   (assoc m
+				     :slot (.trim 
+					    (apply 
+					     str
+					     (rest ((x/select-node n "li") :content)))))
 				   (and (string? (first (n :content)))
 					(re-find #"Classes:" (first (n :content))))
 				   (assoc m 
 				     :allowableClasses 
 				     (vec (map #(first (% :content))
 					       (remove string? (n :content)))))
-				   (x/select-node n "li/ul")
+				   (x/select-node n "li/ul") ; is there set info?
 				   (assoc m
 				     :setData
 				     {:name 
@@ -163,8 +156,9 @@
 				       (map 
 					#(re-find #"[\d]+$"
 						  (((first (% :content)) :attrs) :href))
-					(filter
-					 #(= ((% :attrs) :class) "indent")
+					(filter ; TODO: ignores "Requires Tailoring" etc
+					 #(and (not (nil? (% :attrs)))
+					       (= ((% :attrs) :class) "indent"))
 					 ((x/select-node n "li/ul") :content))))
 				      :bonuses
 				      (vec
@@ -175,7 +169,8 @@
 					   {:threshold (second s)
 					    :desc (.trim (last s))})
 					(filter
-					 #(= ((% :attrs) :class) "color-d4")
+					 #(and (not (nil? (% :attrs)))
+					       (= ((% :attrs) :class) "color-d4"))
 					 ((x/select-node n "li/ul") :content))))
 				       })
 				   :else
@@ -240,7 +235,7 @@
 				   (let [cnt (apply str (n :content))
 					 sockets (or (m :sockets) [])]
 				     (if (re-find #"Socket Bonus" cnt)
-				       (let [bonus (re-find #"\+([\d]+) ([\w ]+)" cnt)
+				       (let [bonus (re-find #"([\d]+) ([\d\w ]+)" cnt)
 					     stat (last bonus)
 					     value (second bonus)
 					     value (try
@@ -277,6 +272,8 @@
 						  :bonusStrength
 						  (= stat "Agility")
 						  :bonusAgility
+						  (= stat "mana per 5 sec")
+						  :bonusMp5
 						  :else
 						  stat) ; no idea what it is
 					    value}))

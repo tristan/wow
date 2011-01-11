@@ -14,7 +14,7 @@
       (let [response (c/get url ops)]
 	(response :body))
       (catch java.lang.Exception e
-	(println url (.getMessage e))
+	;(println url (.getMessage e))
 	nil))))
 
 (defn get-xml [url]
