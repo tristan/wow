@@ -6,7 +6,25 @@ function() {
     switch ($(this).find("select.search-invType").val()) {
 	case "main-hand":
 	case "off-hand":
+	var oh = $(this).find("select.search-subclassID-weapons-oh").val();
+	$.log(oh);
+	if (oh == "shield") {
+	    classId = "4";
+	    subclassId = "6";
+	    invType = null;
+	} else if (oh == "held-in-off-hand") {
+	    classId = "4";
+	    subclassId = "0";
+	    invType = "23";
+	}
+	break;
 	case "ranged":
+	var rng = $(this).find("select.search-subclassID-weapons-ranged").val();
+	if (rng == "relics") {
+	    classId = "4";
+	    subclassId = "11";
+	    invType = null;
+	}
 	break;
 	case "head":
 	classId = "4";
