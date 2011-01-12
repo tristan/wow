@@ -1,39 +1,39 @@
 <label for="search-input">Name:</label> <input type="text" class="search-input"/>
 slot:
-<select class="search-invType">
-  <option value="main-hand">Main Hand</option>
-  <option value="off-hand">Off Hand</option>
-  <option value="ranged">Ranged/Relic</option>
-  <option value="head">Head</option>
-  <option value="neck">Neck</option>
-  <option value="sholders">Sholders</option>
-  <option value="back">Back</option>
-  <option value="chest">Chest</option>
-  <option value="wrists">Wrists</option>
-  <option value="hands">Hands</option>
-  <option value="waist">Waist</option>
-  <option value="legs">Legs</option>
-  <option value="feet">Feet</option>
-  <option value="ring">Ring</option>
-  <option value="trinket">Trinket</option>
+<select class="search-slot">
+  <option value="15">Main Hand</option>
+  <option value="16">Off Hand</option>
+  <option value="17">Ranged/Relic</option>
+  <option value="0">Head</option>
+  <option value="1">Neck</option>
+  <option value="2">Sholders</option>
+  <option value="14">Back</option>
+  <option value="4">Chest</option>
+  <option value="8">Wrists</option>
+  <option value="9">Hands</option>
+  <option value="5">Waist</option>
+  <option value="6">Legs</option>
+  <option value="7">Feet</option>
+  <option value="10">Ring</option>
+  <option value="12">Trinket</option>
 </select>
 type: 
-<select class="search-subclass search-subclassID-weapons-mh">
-  <option value="all">All</option>
-  <option value="valid">Main/One-hand</option>
-  <option value="main-hand">Main-hand</option>
-  <option value="one-hand">One-hand</option>
-  <option value="two-hand">Two-hand</option>
+<select class="search-subclass search-mh">
+  <option value="21,13,17">All</option>
+  <option value="21,13">All One-hand</option>
+  <option value="21">Main-hand Only</option>
+  <option value="13">One-hand Only</option>
+  <option value="17">Two-hand</option>
 </select>
-<select class="search-subclass search-subclassID-weapons-oh" style="display: none;">
-  <option value="all">All</option>
-  <option value="valid">Off/One-hand</option>
-  <option value="off-hand">Off-hand</option>
-  <option value="one-hand">One-hand</option>
-  <option value="shield">Shield</option>
-  <option value="held-in-off-hand">Held in Off-hand</option>
+<select class="search-subclass search-oh" style="display: none;">
+  <option value="22,13,14,23">All</option>
+  <option value="22,13">All One-hand</option>
+  <option value="22">Off-hand Only</option>
+  <option value="13">One-hand Only</option>
+  <option value="14">Shield</option>
+  <option value="23">Held in Off-hand</option>
 </select>
-<select class="search-subclass search-subclassID-weapons-ranged" style="display: none;">
+<select class="search-subclass search-ranged" style="display: none;">
   <option value="all">All</option>
   <option value="weapons">Weapons</option>
   <option value="bows">Bows</option>

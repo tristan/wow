@@ -1,11 +1,11 @@
 function(evt) {
     // items/_init/selectors/a/click.js
     $(".item-search").show();
-    var id = $(this).parent().parent().attr("id");
-    if (id == "ring1" || id == "ring2") {
-	id = "ring";
-    } else if (id == "trinket1" || id == "trinket2") {
-	id = "trinket";
+    var slot = $(this).parent().parent().attr("slot");
+    if (slot == "11") {
+	slot = "10";
+    } else if (slot == "13") {
+	slot = "12";
     }
-    $(".search-invType").val(id).trigger('change');
+    $(".search-slot").val(slot).trigger('change');
 }

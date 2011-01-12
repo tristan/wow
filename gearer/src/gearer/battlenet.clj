@@ -125,19 +125,51 @@
 							 )}]
 				     (assoc m :damageData
 					    (conj damageData dd)))
-				   (let [lispan (x/select-node-content 
+				   (and (let [lispan (x/select-node-content 
 					; the "slot" "type" row
-						 n "li/span")]
-				     (if (string? lispan)
-				       (not (= (.trim 
-						(str (x/select-node-content
-						      n "li"))) "Sell Price:"))
-				       false))
-				   (assoc m
-				     :slot (.trim 
-					    (apply 
-					     str
-					     (rest ((x/select-node n "li") :content)))))
+						      n "li/span")]
+					  (if (string? lispan)
+					    (not (= (.trim 
+						     (str (x/select-node-content
+							   n "li"))) "Sell Price:"))
+					    false))
+					(not (= (m :classId "4")))) ; armor is set already
+				   (let [slot-name
+					 (.toLowerCase
+					  (.trim 
+					   (apply 
+					    str
+					    (rest ((x/select-node n "li") :content)))))]
+				     (assoc m
+				       :invType
+				       (cond (= slot-name "main-hand")
+					     "21"
+					     (= slot-name "off-hand")
+					     "22"
+					     (= slot-name "one-hand")
+					     "13"
+					     (= slot-name "two-hand")
+					     "17"
+					     (= slot-name "ranged")
+					     (cond (= (item :subclassId) "19") ; wands
+						   "26" ; ignoring crossbows being 26
+						   :else ; default to other ranged weapons
+						   "15")
+					     (= slot-name "thrown")
+					     "25"
+					     (= slot-name "consumable")
+					     "0"
+					     (= slot-name "shield")
+					     "14"
+					     (= slot-name "relic")
+					     "28"
+					     (= slot-name "held in off-hand")
+					     "23"
+					     :else
+					     (do (println "error:" m)
+						 (throw (Exception. 
+						     (str "UNKNOWN invType: " slot-name
+							  " on item-" itemId)))))))
 				   (and (string? (first (n :content)))
 					(re-find #"Classes:" (first (n :content))))
 				   (assoc m 
@@ -148,8 +180,8 @@
 				   (assoc m
 				     :setData
 				     {:name 
-				      (last
-				       (re-find #"([\w ]+) \("
+				      (last  ; TODO: check needed punctuation
+				       (re-find #"([\w ']+) \("
 						(x/select-node-content n "li/ul/li")))
 				      :items
 				      (vec
@@ -232,10 +264,12 @@
 							       1 0)
 							     :desc (last s)})))
 				   (re-find #"Socket" (apply str (n :content)))
-				   (let [cnt (apply str (n :content))
+				   (let [cnt (apply str (map #(.trim (str %)) (n :content)))
 					 sockets (or (m :sockets) [])]
-				     (if (re-find #"Socket Bonus" cnt)
-				       (let [bonus (re-find #"([\d]+) ([\d\w ]+)" cnt)
+				     (if (re-find #"Socket Bonus:" cnt)
+				       (let [bonus (re-find 
+						    #"^Socket Bonus:[ ]+[\+]?([^ ]+) (.+)$" 
+						    cnt)
 					     stat (last bonus)
 					     value (second bonus)
 					     value (try

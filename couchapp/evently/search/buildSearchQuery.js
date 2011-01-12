@@ -1,82 +1,26 @@
 function() {
     $.log("building search query");
-    var classId = "2";
-    var subclassId = "0";
-    var invType = "0";
-    switch ($(this).find("select.search-invType").val()) {
-	case "main-hand":
-	case "off-hand":
-	var oh = $(this).find("select.search-subclassID-weapons-oh").val();
-	$.log(oh);
-	if (oh == "shield") {
-	    classId = "4";
-	    subclassId = "6";
-	    invType = null;
-	} else if (oh == "held-in-off-hand") {
-	    classId = "4";
-	    subclassId = "0";
-	    invType = "23";
-	}
-	break;
-	case "ranged":
-	var rng = $(this).find("select.search-subclassID-weapons-ranged").val();
-	if (rng == "relics") {
-	    classId = "4";
-	    subclassId = "11";
-	    invType = null;
-	}
-	break;
-	case "head":
-	classId = "4";
-	invType = "1";
-	break;
-	case "neck":
-	classId = "4";
-	invType = "2";
-	break;
-	case "sholders":
-	classId = "4";
-	invType = "3";
-	break;
-	case "back":
-	case "chest":
-	classId = "4";
-	invType = "5";
-	break;
-	case "wrists":
-	classId = "4";
-	invType = "9";
-	break;
-	case "hands":
-	classId = "4";
-	invType = "10";
-	break;
-	case "waist":
-	classId = "4";
-	invType = "6";
-	break;
-	case "legs":
-	classId = "4";
-	invType = "7";
-	break;
-	case "feet":
-	classId = "4";
-	invType = "8";
-	break;
-	case "ring":
-	classId = "4";
-	invType = "11";
-	break;
-	case "trinket":
-	classId = "4";
-	invType = "12";
-	break;
+    var classId = null;
+    var subclassId = null;
+    var invType = null;
+    var slot = $(".search-slot").val();
+    if ($(".search-mh").is(':visible')) {
+	classId = "2";
+	invType = $(".search-mh").val();
+    }
+    else if ($(".search-oh").is(':visible')) {
+	invType = $(".search-oh").val();
+	if (invType == "22,13,14,23")
+	    classId = "2,4";
+	else
+	    classId = "2";
     }
     if ($(".search-subclassID-armor").is(':visible')) {
 	subclassId = $(".search-subclassID-armor").val();
     }
     var query = {
 	name: $(this).find("input.search-input").val(),
+	slot: slot,
 	classId: classId,
 	subclassId: subclassId,
 	invType: invType,
