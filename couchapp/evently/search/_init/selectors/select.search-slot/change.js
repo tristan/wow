@@ -18,7 +18,7 @@ function() {
 	case "14":
 	    break;
 	default:
-	    $(".search-subclassID-armor").show();
+	    $(".search-armor").show();
 	    break;
     }
     $(this).trigger('buildSearchQuery');

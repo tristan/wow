@@ -25,6 +25,9 @@ function(evt, key) {
     var classIds = key.classId.split(',');
     var subclassIds = ["0","1","2","3","4","5","6","7","8","9", // TODO: this...
 		       "10","11","12","13","14","15","16","17","18","19","20"];
+    if (key.subclassId != null) {
+	subclassIds = key.subclassId.split(",");
+    }
     var keys = [];
     for (var i = 0; i < valid_ilvls.length; i++) {
 	for (var j = 0; j < invTypes.length; j++) {

@@ -69,7 +69,9 @@ class/[valid subclass's]/invType:
 4/[]/25: thrown
 4/[]/26: ranged (wand)
 4/[]/27: quiver
-4/[]/28: relic
+4/[11]/28: relic
+
+
 
 
 

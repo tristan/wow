@@ -14,9 +14,42 @@ function() {
 	    classId = "2,4";
 	else
 	    classId = "2";
-    }
-    if ($(".search-subclassID-armor").is(':visible')) {
-	subclassId = $(".search-subclassID-armor").val();
+    } else if ($(".search-ranged").is(':visible')) {
+	invType = "15,25,26,11"; // TODO: maybe optimise this for specific subclasses
+	subclassId = $(".search-ranged").val();
+	if (subclassId.search(/11/) >= 0) {
+	    if (subclassId == "11") {
+		classId = "4";
+		invType = "28";
+	    } else {
+		classId = "2,4";
+	    }
+	} else {
+	    classId = "2";
+	    invType = "15,25,26";
+	}
+    } else if ($(".search-armor").is(':visible')) {
+	classId = "4";
+	invType = String(parseInt(slot)+1);
+	subclassId = $(".search-armor").val();
+    } else { // assume neck/back/ring/trinket
+	subclassId = "0";
+	classId = "4";
+	switch (slot) {
+	    case "1":
+	    invType = "2";
+	    break;
+	    case "14":
+	    invType = "16";
+	    subclassId = "0,1";
+	    break;
+	    case "10":
+	    invType = "11";
+	    break;
+	    case "12":
+	    invType = "12";
+	    break;
+	}
     }
     var query = {
 	name: $(this).find("input.search-input").val(),
