@@ -41,7 +41,7 @@ function(evt, key) {
 	    }
 	}
     }
-    $.log(keys);
+    //$.log(keys);
     return {
 	view: "items-by-slot",
 	keys: keys

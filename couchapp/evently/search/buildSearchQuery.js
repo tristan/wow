@@ -51,8 +51,21 @@ function() {
 	    break;
 	}
     }
+    var filters = {
+	filter: [],
+	remove: []
+    };
+    $(".stat").each(
+	function(a,b) {
+	    if ($(b).val() == "yes") {
+		filters.filter.push($(b).attr("class").split(/\s+/)[1]);
+	    } else if ($(b).val() == "no") {
+		filters.remove.push($(b).attr("class").split(/\s+/)[1]);
+	    }
+	});
     var query = {
 	name: $(this).find("input.search-input").val(),
+	filters: filters,
 	slot: slot,
 	classId: classId,
 	subclassId: subclassId,
