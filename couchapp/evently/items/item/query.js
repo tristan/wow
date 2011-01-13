@@ -1,7 +1,7 @@
-function(evt) {
-    $.log("called query");
+function(evt, id) {
+    //$.log("called query", id);
     return {
 	view: "items",
-	key: $$(this).itemid
+	key: id
     };
 }

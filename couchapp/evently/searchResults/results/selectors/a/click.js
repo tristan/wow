@@ -1,4 +1,9 @@
 function() {
     // searchResults/results/selectors/a/click.js
-    $.log("selected: " + $(this).attr("href"));
+    //$.log("item: " + $(this).attr("href"));
+    //$.log("slot: " + $("tr.slot.selected").attr("slot"));
+    $("tr.slot.selected").trigger('getItem', $(this).attr("href").substr(1));
+    // TODO: these may be better futher down the chain
+    $("tr.slot.selected").removeClass('selected');
+    $(".item-search").hide();
 }

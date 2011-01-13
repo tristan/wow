@@ -31,6 +31,9 @@ function() {
     } else if ($(".search-armor").is(':visible')) {
 	classId = "4";
 	invType = String(parseInt(slot)+1);
+	if (invType == "5") {
+	    invType = "5,20"; // include robes!
+	}
 	subclassId = $(".search-armor").val();
     } else { // assume neck/back/ring/trinket
 	subclassId = "0";

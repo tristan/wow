@@ -1,4 +1,4 @@
-function(e, itemid) {
-    $$(this).itemid = itemid;
-    $(this).trigger('item');
+function(e, itemid,a) {
+    $.log("getItem", itemid, a);
+    $(this).trigger('item', itemid);
 }

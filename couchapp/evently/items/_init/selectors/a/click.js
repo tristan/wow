@@ -2,6 +2,8 @@ function(evt) {
     // items/_init/selectors/a/click.js
     $(".item-search").show();
     var slot = $(this).parent().parent().attr("slot");
+    $(this).parent().parent().siblings().removeClass("selected");
+    $(this).parent().parent().addClass("selected");
     if (slot == "11") {
 	slot = "10";
     } else if (slot == "13") {

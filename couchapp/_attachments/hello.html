@@ -54,6 +54,8 @@
         $(".item-search-results").evently("searchResults", app);
         $.evently.connect(".item-search-input", 
                           ".item-search-results", ["addSearchResults"]);
+        $.evently.connect(".item-search-results", 
+                          "tr.slot", ["getItem"]);
     });
   </script>
 </html>
