@@ -1,11 +1,15 @@
-function(data, evt, itemid) {
-    //$.log("called data", data, evt, itemid);
+function(data, evt, req) {
+    //$.log("called data", req);
     if (data.rows.length > 0) {
 	var item = data.rows[0].value;
 	item.slot = $(this).children("td.slot").html();
-	$.log(item.slot);
+	//$.log(item.slot);
 	return item;
     } else {
+	var itemid = req;
+	if (typeof(req) == "object") {
+	    itemid = req.id;
+	}
 	$.log("didn't find: " + itemid);
 	var ireq = {
 	    id: itemid,
