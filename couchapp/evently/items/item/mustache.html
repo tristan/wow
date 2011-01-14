@@ -112,8 +112,11 @@
 </td>
 <td class="gems">
   {{#sockets}}
-  {{.}}
+  <div class="socket-outer socket-{{.}}">
+    <a href="javascript:;" class="socket" color="{{.}}"><span class="icon"/></a>
+  </div>
   {{/sockets}}
+  <div style="clear: both;"/>
 </td>
 <td class="enchant"</td>
 {{/name}}

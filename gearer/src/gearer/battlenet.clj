@@ -64,6 +64,24 @@
 				   trail-node
 				   "ol/li[5]/a") :attrs) :href))))
 	       item)
+	item (if (= (item :classId) "3") ; gem!
+	       (let [specs (map #(.trim (str (x/select-node-content % "li"))) (item-specs-node :content))
+		     specs (first (filter #(re-find #"^\+[\d]+[ ]+.+$" %) specs))]
+		 (if (not (nil? specs))
+		   (reduce (fn [item stat]
+			     (if (re-find #"^\+[\d]+[ ]+.+$" stat)
+			       (let [[_ val key] (re-find #"^\+([\d]+)[ ]+(.+)$" stat)]
+				 (assoc item
+				   (keyword (str "bonus" (re/str-join "" (re/re-split #" " key))))
+				   (Integer/parseInt val)))
+			       (let [misc (get item :miscStats [])]
+				 (assoc item
+				   :miscStats
+				   (conj misc stat)))))
+			   (assoc item :invType "0")
+			   (re/re-split #" and " specs))
+		   item))
+	       item)
 	item (reduce (fn [m n]
 		       (cond (nil? (n :attrs))
 			     (cond (reduce #(and (string? %2) %1) true (n :content))
@@ -78,6 +96,13 @@
 					   (assoc m :requiredLevel
 						  (last (re-find #"Requires Level ([\d]+)" 
 								 s)))
+					   (re-find #"Requires [\w]+ \([\d]+\)" s)
+					   (assoc m :requiresProfession
+						  (let [[_ prof lvl] 
+							(re-find #"Requires ([\w]+) \(([\d]+)\)" 
+								 s)]
+						    {:profession prof
+						     :level lvl}))
 					   (re-find #"Binds" s)
 					   (assoc m :bonding s)
 					   (re-find #"\([\d\.]+ damage per second\)" s)
@@ -263,7 +288,8 @@
 							     (if (= (second s) "Equip")
 							       1 0)
 							     :desc (last s)})))
-				   (re-find #"Socket" (apply str (n :content)))
+				   (and (re-find #"Socket" (apply str (n :content))) 
+					(not (= (item :classId) "3"))) ; ignore when gem
 				   (let [cnt (apply str (map #(.trim (str %)) (n :content)))
 					 sockets (or (m :sockets) [])]
 				     (if (re-find #"Socket Bonus:" cnt)

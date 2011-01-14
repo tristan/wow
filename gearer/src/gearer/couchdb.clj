@@ -50,7 +50,8 @@
 
 (defn populate-database []
   (let [items (lazy-cat ;(bn/search {:classId 2}) ; weapons
-			(bn/search {:classId 4 :page 1252}) ; armor
+			;(bn/search {:classId 4 :page 1252}) ; armor
+	                 (bn/search {:classId 3}) ; gems
 			)]
     (doseq [item items]
       (print (str "classId: " (item :classId) ", page: " (item :page)

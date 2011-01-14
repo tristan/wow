@@ -38,23 +38,39 @@ a { outline: none; text-decoration: none; }
 .inventory .item-quality-7 a.item .frame { background-position: -392px 0; }
 
 /* socket icons */
-.icon-socket.socket-Meta  .empty { background-color: #29292a; } /* Meta */
-.icon-socket.socket-Red  .empty { background-color: #301010; } /* Red */
-.icon-socket.socket-Yellow  .empty { background-color: #403010; } /* Yellow */
-.icon-socket.socket-Blue  .empty { background-color: #102040; } /* Blue */
-.icon-socket.socket-Prismatic .empty { background-color: #29292a; } /* Prismatic */
-.icon-socket.socket-Hydraulic .empty { background-color: red; }     /* Hydraulic */
-.icon-socket.socket-Cogwheel .empty { background-color: #29292a; } /* Cogwheel */
-.icon-socket.socket-Meta  .frame { background-position:  -45px   0; } /* Meta */
-.icon-socket.socket-Red  .frame { background-position:      0   0; } /* Red */
-.icon-socket.socket-Yellow  .frame { background-position:  -15px   0; } /* Yellow */
-.icon-socket.socket-Blue  .frame { background-position:  -30px   0; } /* Blue */
-.icon-socket.socket-Orange  .frame { background-position:  -90px   0; } /* Orange */
-.icon-socket.socket-Purple .frame { background-position:  -75px   0; } /* Purple */
-.icon-socket.socket-Green .frame { background-position: -105px   0; } /* Green */
-.icon-socket.socket-Prismatic .frame { background-position:  -60px   0; } /* Prismatic */
-.icon-socket.socket-Hydraulic .frame { background-position:      0   0; } /* Hydraulic */
-.icon-socket.socket-Cogwheel .frame { background-position:  -45px   0; } /* Cogwheel */
+.socket-outer {
+    width: 15px;
+    height: 15px;
+    background: url("../images/icons/frames/sockets.png") no-repeat;
+    float: left;
+    margin-right: 4px;
+}
+
+.socket-outer .icon {
+    width: 13px;
+    height: 13px;
+    padding: 1px 0 0 1px;
+    display: block;
+}
+
+.socket-Meta .empty { background-color: #29292a; } /* Meta */
+.socket-Red .empty { background-color: #301010; } /* Red */
+.socket-Yellow .empty { background-color: #403010; } /* Yellow */
+.socket-Blue .empty { background-color: #102040; } /* Blue */
+.socket-Prismatic .empty { background-color: #29292a; } /* Prismatic */
+.socket-Hydraulic .empty { background-color: red; }     /* Hydraulic */
+.socket-Cogwheel .empty { background-color: #29292a; } /* Cogwheel */
+
+.socket-Meta { background-position:  -45px   0; } /* Meta */
+.socket-Red { background-position:      0   0; } /* Red */
+.socket-Yellow { background-position:  -15px   0; } /* Yellow */
+.socket-Blue { background-position:  -30px   0; } /* Blue */
+.socket-Orange { background-position:  -90px   0; } /* Orange */
+.socket-Purple { background-position:  -75px   0; } /* Purple */
+.socket-Green { background-position: -105px   0; } /* Green */
+.socket-Prismatic { background-position:  -60px   0; } /* Prismatic */
+.socket-Hydraulic { background-position:      0   0; } /* Hydraulic */
+.socket-Cogwheel { background-position:  -45px   0; } /* Cogwheel */
 
 /* item colors */
 .item-quality-0 { color: #9d9d9d; }
