@@ -8,9 +8,11 @@
 (defn get-xml [url]
   (let [response (c/get url)]
     ;(spit "output.html" (response :body))
-    (let [xmlstream (java.io.ByteArrayInputStream. (.getBytes (response :body)))
-	  xmlmap (clojure.xml/parse xmlstream)]
-      xmlmap)))
+    (let [reader (java.io.StringReader. (response :body))
+	  is (org.xml.sax.InputSource. reader)]
+      (. is setEncoding "UTF-8")
+      (clojure.xml/parse is))))
+      ;xmlmap)))
 
 ; http://us.battle.net/wow/en/item/itemId
 ; TODO: trinket/ring/weapon uniqueness
@@ -63,6 +65,11 @@
 				(((x/select-node
 				   trail-node
 				   "ol/li[5]/a") :attrs) :href))))
+	       item)
+	item (if (and (= (item :classId) "4")
+		      (= (item :subclassId) "6")) ; shields!
+	       (assoc item
+		 :invType "14")
 	       item)
 	item (if (= (item :classId) "3") ; gem!
 	       (let [specs (map #(.trim (str (x/select-node-content % "li"))) (item-specs-node :content))
@@ -158,13 +165,14 @@
 						     (str (x/select-node-content
 							   n "li"))) "Sell Price:"))
 					    false))
-					(not (= (m :classId "4")))) ; armor is set already
+					(and (not (= (m :classId "4"))))) ; armor is set already
 				   (let [slot-name
 					 (.toLowerCase
 					  (.trim 
 					   (apply 
 					    str
 					    (rest ((x/select-node n "li") :content)))))]
+				     (println slot-name)
 				     (assoc m
 				       :invType
 				       (cond (= slot-name "main-hand")

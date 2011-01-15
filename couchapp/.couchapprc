@@ -1,7 +1,7 @@
 {
  "env": {
         "default": {
-          "db": "http://tristan:l3557h4nj4k3@localhost:5984/wow"
+          "db": "http://tk:qwertyui@localhost:5984/wow"
         }
       }
 }

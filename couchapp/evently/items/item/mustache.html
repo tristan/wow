@@ -112,8 +112,11 @@
 </td>
 <td class="gems">
   {{#sockets}}
-  <div class="socket-outer socket-{{.}}">
-    <a href="javascript:;" class="socket" color="{{.}}"><span class="icon"/></a>
+  <div class="socket-outer">
+    <a href="javascript:;" class="socket" color="{{.}}">
+      <span class="icon"/>
+      <span class="frame socket-{{.}}"/>
+    </a>
   </div>
   {{/sockets}}
   <div style="clear: both;"/>

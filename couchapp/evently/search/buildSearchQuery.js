@@ -12,6 +12,8 @@ function() {
 	invType = $(".search-oh").val();
 	if (invType == "22,13,14,23")
 	    classId = "2,4";
+	else if (invType == "14")
+	    classId = "4";
 	else
 	    classId = "2";
     } else if ($(".search-ranged").is(':visible')) {
@@ -35,6 +37,11 @@ function() {
 	    invType = "5,20"; // include robes!
 	}
 	subclassId = $(".search-armor").val();
+    } else if ($(".search-gem").is(":visible")) {
+	subclassId = $(".search-gem").val();
+	classId = "3";
+	invType = "0";
+	slot = "0";
     } else { // assume neck/back/ring/trinket
 	subclassId = "0";
 	classId = "4";
