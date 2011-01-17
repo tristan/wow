@@ -39,10 +39,15 @@ a { outline: none; text-decoration: none; }
 
 /* socket icons */
 .socket-outer {
-    width: 15px;
-    height: 15px;
+    /*width: 15px;
+    height: 15px;*/
     float: left;
     margin-right: 4px;
+}
+
+.socket-bonus {
+    float: left;
+    padding: 5px;
 }
 
 .socket-outer .icon {
@@ -60,24 +65,86 @@ a { outline: none; text-decoration: none; }
     background: url("../images/icons/frames/sockets.png") no-repeat;
 }
 
-.socket-Meta .empty { background-color: #29292a; } /* Meta */
-.socket-Red .empty { background-color: #301010; } /* Red */
-.socket-Yellow .empty { background-color: #403010; } /* Yellow */
-.socket-Blue .empty { background-color: #102040; } /* Blue */
-.socket-Prismatic .empty { background-color: #29292a; } /* Prismatic */
-.socket-Hydraulic .empty { background-color: red; }     /* Hydraulic */
-.socket-Cogwheel .empty { background-color: #29292a; } /* Cogwheel */
+.socket-outer {
+    border: 3px solid;
+    padding: 2px;
+}
 
-.socket-Meta { background-position:  -45px   0 !important; } /* Meta */
-.socket-Red { background-position:      0   0 !important;; } /* Red */
-.socket-Yellow { background-position:  -15px   0 !important; } /* Yellow */
-.socket-Blue { background-position:  -30px   0 !important; } /* Blue */
-.socket-Orange { background-position:  -90px   0 !important; } /* Orange */
-.socket-Purple { background-position:  -75px   0 !important; } /* Purple */
-.socket-Green { background-position: -105px   0 !important; } /* Green */
-.socket-Prismatic { background-position:  -60px   0 !important; } /* Prismatic */
-.socket-Hydraulic { background-position:      0   0 !important; } /* Hydraulic */
-.socket-Cogwheel { background-position:  -45px   0 !important; } /* Cogwheel */
+.socket {
+    color: white;
+}
+
+.socket-Meta { background-color: #29292a;
+	       border-color: #eeeeee;
+	       color: #eeeeee;
+	     } /* Meta */
+.socket-Red { background-color: #301010; 
+	      border-color: #f00609;
+	      color: #f00609;
+	    } /* Red */
+.socket-Yellow { background-color: #403010; 
+		 border-color: #fcef00;
+		 color: #fcef00;
+	       } /* Yellow */
+.socket-Blue { background-color: #102040; 
+	       border-color: #09c2ff;
+	       color: #09c2ff;
+	     } /* Blue */
+.socket-Prismatic { background-color: #29292a; 
+		    border-color: #b1b1b1;
+		    color: #b1b1b1;
+		  } /* Prismatic */
+.socket-Hydraulic { background-color: red; 
+		    border-color: #b1b1b1;
+		    color: #b1b1b1;
+		  }     /* Hydraulic */
+.socket-Cogwheel { background-color: #29292a; 
+		   border-color: #b1b1b1;
+		   color: #b1b1b1;
+		 } /* Cogwheel */
+
+/* gem colors */
+.gem-subclassId-0 { /* red */
+    color: #f00609;
+}
+.gem-subclassId-1 { /* blue */
+    color: #09c2ff;
+}
+.gem-subclassId-2 { /* yellow */
+    color: #fcef00;
+}
+.gem-subclassId-3 { /* purple */
+    color: #d700ff;
+}
+.gem-subclassId-4 { /* green */
+    color: #39e730;
+}
+.gem-subclassId-5 { /* orange */
+    color: #ffb000;
+}
+.gem-subclassId-6 { /* meta */
+    color: #eeeeee;
+}
+.gem-subclassId-8 { /* prismatic */
+    color: #b1b1b1;
+}
+.gem-subclassId-9 { /* hydraulic */
+    color: #b1b1b1;
+}
+.gem-subclassId-10 { /* cogwheel */
+    color: #b1b1b1;
+}
+
+.socket-Meta .frame { background-position:  -45px   0 !important; } /* Meta */
+.socket-Red .frame { background-position:      0   0 !important;; } /* Red */
+.socket-Yellow .frame { background-position:  -15px   0 !important; } /* Yellow */
+.socket-Blue .frame { background-position:  -30px   0 !important; } /* Blue */
+.socket-Orange .frame { background-position:  -90px   0 !important; } /* Orange */
+.socket-Purple .frame { background-position:  -75px   0 !important; } /* Purple */
+.socket-Green .frame { background-position: -105px   0 !important; } /* Green */
+.socket-Prismatic .frame { background-position:  -60px   0 !important; } /* Prismatic */
+.socket-Hydraulic .frame { background-position:      0   0 !important; } /* Hydraulic */
+.socket-Cogwheel .frame { background-position:  -45px   0 !important; } /* Cogwheel */
 
 /* item colors */
 .item-quality-0 { color: #9d9d9d; }

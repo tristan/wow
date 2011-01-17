@@ -25,7 +25,7 @@
 	  (c/put (str "http://localhost:5984/wow/icons%2F" s "/" icon-file-name
 		      (str "?rev=" rev))
 		 {:headers {"Content-Type" "image/jpeg"}
-		  :body f})))))
+		  :body f}))))))
 
 (defn load-item [id]
   (let [i (get-json (str "http://localhost:5984/wow/item-" id))]

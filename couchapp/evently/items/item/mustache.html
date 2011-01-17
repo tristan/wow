@@ -1,7 +1,7 @@
 {{#name}}
 <td class="slot">{{slot}}</td>
 <td class="item">
-  <a class="item-quality-{{quality}}" href="javascript:;">{{name}}</a>
+  <a class="item-quality-{{quality}}" href="javascript:;//{{id}}">{{name}}</a>
   <span class="item-quality-0">({{itemLevel}})</span>
 </td>
 <td class="stats">
@@ -112,13 +112,17 @@
 </td>
 <td class="gems">
   {{#sockets}}
-  <div class="socket-outer">
+  <div class="socket-outer socket-{{.}}">
     <a href="javascript:;" class="socket" color="{{.}}">
-      <span class="icon"/>
-      <span class="frame socket-{{.}}"/>
+      {{.}}
     </a>
   </div>
   {{/sockets}}
+  {{#socketBonus}}
+  <div class="socket-bonus">
+  Socket Bonus: {{socketBonus}}
+  </div>
+  {{/socketBonus}}
   <div style="clear: both;"/>
 </td>
 <td class="enchant"</td>

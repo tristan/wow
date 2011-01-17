@@ -2,7 +2,7 @@ function(evt) {
     // items/item/selectors/a/click.js
     $(".item-search").show();
     var slot;
-    if ($(this).attr("class") == "socket") {
+    if ($(this).attr("class").search(/socket/) >= 0) {
 	slot = "18";
 	$(this).parent().siblings().removeClass("selected");
 	$(this).parent().addClass("selected");
