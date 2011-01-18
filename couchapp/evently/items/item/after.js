@@ -26,13 +26,24 @@ function(data, evt, req) {
 	    var slot = parseInt($(this).attr("slot"));
 	    StateManager.addItem(slot, item);
 	} else { // otherwise it's being set by the loader
-	    // set reforges
 	    if (typeof(req) == "object") {
+		// set reforges
 		if (req.re != null) {
 		    var rf = reforgeIdsReverse[parseInt(req.re)];
 		    if (rf != null && rf.length == 2) {
 			$(this).find(".rff").val(rf[0]);
 			$(this).find(".rft").val(rf[1]);
+		    }
+		}
+		// set gems
+		for (k in req) {
+		    var isgem = k.match(/^g(\d+)/);
+		    if (isgem != null) {
+			var socketno = parseInt(isgem[1]);
+			var gemid = req[k];
+			$(this).trigger("setSocket", {slot: $(this).attr("slot"), 
+						      socket: socketno, 
+						      id: gemid});
 		    }
 		}
 	    }

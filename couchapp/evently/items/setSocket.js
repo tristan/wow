@@ -1,5 +1,5 @@
-function(evt, itemid) {
-    $.log("gem:", itemid);
-    $(this).find("div.socket-outer.selected")
-	.trigger('gem', itemid);
+function(evt, data) {
+    // items/setSocket.js
+    //$.log("gem:", data);
+    $(this).trigger('gem', data);
 }

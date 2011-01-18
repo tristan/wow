@@ -208,6 +208,13 @@ StateManager = {
 	}
     },
     setGems: function(slot, gems) {
+	var data = {};
+	for (var i = 0; i < gems.length; i++) {
+	    if (gems[i] != "") {
+		data["g" + i] = gems[i];
+	    }
+	}
+	this.setItemData(slot, data);
     },
     setEnchant: function(slot, enchant) {
     },
