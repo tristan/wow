@@ -1,142 +1,158 @@
-<label for="search-input">Name:</label> <input type="text" class="search-input"/>
-slot:
-<select class="search-slot">
-  <option value="15">Main Hand</option>
-  <option value="16">Off Hand</option>
-  <option value="17">Ranged/Relic</option>
-  <option value="0">Head</option>
-  <option value="1">Neck</option>
-  <option value="2">Sholders</option>
-  <option value="14">Back</option>
-  <option value="4">Chest</option>
-  <option value="8">Wrists</option>
-  <option value="9">Hands</option>
-  <option value="5">Waist</option>
-  <option value="6">Legs</option>
-  <option value="7">Feet</option>
-  <option value="10">Ring</option>
-  <option value="12">Trinket</option>
-  <option value="18">Gem</option>
-</select>
-type: 
-<select class="search-subclass search-mh">
-  <option value="21,13,17">All</option>
-  <option value="21,13">All One-hand</option>
-  <option value="21">Main-hand Only</option>
-  <option value="13">One-hand Only</option>
-  <option value="17">Two-hand</option>
-</select>
-<select class="search-subclass search-oh" style="display: none;">
-  <option value="22,13,14,23">All</option>
-  <option value="22,13">All One-hand</option>
-  <option value="22">Off-hand Only</option>
-  <option value="13">One-hand Only</option>
-  <option value="14">Shield</option>
-  <option value="23">Held in Off-hand</option>
-</select>
-<select class="search-subclass search-ranged" style="display: none;">
-  <option value="2,3,18,16,19,11">All</option>
-  <option value="2,3,18,16">Rogue/Warrior</option>
-  <option value="2,3,18">Hunter</option>
-  <option value="2">Bows</option>
-  <option value="3">Guns</option>
-  <option value="18">Crossbows</option>
-  <option value="16">Thrown</option>
-  <option value="19">Wands</option>
-  <option value="11">Relics</option>
-</select>
-<select class="search-subclass search-armor" style="display: none;">
-  <option value="1">Cloth</option>
-  <option value="2">Leather</option>
-  <option value="3">Mail</option>
-  <option value="4">Plate</option>
-</select>
-<select class="search-subclass search-gem" style="display: none;">
-  <option value="0,1,2,3,4,5,6,8,10">All</option>
-  <option value="0,3,5">Fits Red</option>
-  <option value="1,3,4">Fits Blue</option>
-  <option value="2,4,5">Fits Yellow</option>
-  <option value="0">Red</option>
-  <option value="1">Blue</option>
-  <option value="2">Yellow</option>
-  <option value="3">Purple</option>
-  <option value="4">Green</option>
-  <option value="5">Orange</option>
-  <option value="6">Meta</option>
-  <option value="8">Prismatic</option>
-  <option value="10">Gogwheel</option>
-</select>
+<div class="item-search-box">
+  <div class="item-search-inner">
+    <div class="item-search-input">
+      <label for="search-input">Name:</label> <input type="text" class="search-input"/>
+      slot:
+      <select class="search-slot" disabled="disabled">
+	<option value="15">Main Hand</option>
+	<option value="16">Off Hand</option>
+	<option value="17">Ranged/Relic</option>
+	<option value="0">Head</option>
+	<option value="1">Neck</option>
+	<option value="2">Sholders</option>
+	<option value="14">Back</option>
+	<option value="4">Chest</option>
+	<option value="8">Wrists</option>
+	<option value="9">Hands</option>
+	<option value="5">Waist</option>
+	<option value="6">Legs</option>
+	<option value="7">Feet</option>
+	<option value="10">Ring</option>
+	<option value="12">Trinket</option>
+	<option value="18">Gem</option>
+      </select>
+      type: 
+      <select class="search-subclass search-mh">
+	<option value="21,13,17">All</option>
+	<option value="21,13">All One-hand</option>
+	<option value="21">Main-hand Only</option>
+	<option value="13">One-hand Only</option>
+	<option value="17">Two-hand</option>
+      </select>
+      <select class="search-subclass search-oh" style="display: none;">
+	<option value="22,13,14,23">All</option>
+	<option value="22,13">All One-hand</option>
+	<option value="22">Off-hand Only</option>
+	<option value="13">One-hand Only</option>
+	<option value="14">Shield</option>
+	<option value="23">Held in Off-hand</option>
+      </select>
+      <select class="search-subclass search-ranged" style="display: none;">
+	<option value="2,3,18,16,19,11">All</option>
+	<option value="2,3,18,16">Rogue/Warrior</option>
+	<option value="2,3,18">Hunter</option>
+	<option value="2">Bows</option>
+	<option value="3">Guns</option>
+	<option value="18">Crossbows</option>
+	<option value="16">Thrown</option>
+	<option value="19">Wands</option>
+	<option value="11">Relics</option>
+      </select>
+      <select class="search-subclass search-armor" style="display: none;">
+	<option value="1">Cloth</option>
+	<option value="2">Leather</option>
+	<option value="3">Mail</option>
+	<option value="4">Plate</option>
+      </select>
+      <select class="search-subclass search-gem" style="display: none;">
+	<option value="0,1,2,3,4,5,6,8,10">All</option>
+	<option value="0,3,5">Fits Red</option>
+	<option value="1,3,4">Fits Blue</option>
+	<option value="2,4,5">Fits Yellow</option>
+	<option value="0">Red</option>
+	<option value="1">Blue</option>
+	<option value="2">Yellow</option>
+	<option value="3">Purple</option>
+	<option value="4">Green</option>
+	<option value="5">Orange</option>
+	<option value="6">Meta</option>
+	<option value="8">Prismatic</option>
+	<option value="10">Cogwheel</option>
+      </select>
 
-ilvl: <input class="search-itemlevel ilvlf" type="text" style="width:50px;" value="333"/>
--
-<input class="search-itemlevel ilvlt" type="text" style="width:50px;"/>
+      <span class="ilvls-for-items">
+      ilvl: <input class="search-itemlevel ilvlf" type="text" style="width:50px;" value="333"/>
+      -
+      <input class="search-itemlevel ilvlt" type="text" style="width:50px;"/>
+      </span>
+      <span class="ilvls-for-gems" style="display: none;">
+      ilvl: <input class="search-itemlevel ilvlf" type="text" style="width:50px;" value="85"/>
+      -
+      <input class="search-itemlevel ilvlt" type="text" style="width:50px;"/>
+      </span>
+      <br/>
 
-<br/>
-
-Strength:
-<select class="stat bonusStrength">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Agility:<select class="stat bonusAgility">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Intellect:<select class="stat bonusIntellect">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Spirit:<select class="stat bonusSpirit">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Mastery Rating:<select class="stat bonusMasteryRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Crit Rating:<select class="stat bonusCritRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Haste Rating:<select class="stat bonusHasteRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Hit Rating:<select class="stat bonusHitRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Expertise Rating:<select class="stat bonusExpertise">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Dodge Rating:<select class="stat bonusDodgeRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Parry Rating:<select class="stat bonusParryRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-Resilience:<select class="stat bonusResilienceRating">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no" selected="selected">no</option>
-</select>
-Spell Power:<select class="stat bonusSpellPower">
-  <option value="any">any</option>
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-
+      Strength:
+      <select class="stat bonusStrength">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Agility:<select class="stat bonusAgility">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Intellect:<select class="stat bonusIntellect">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Spirit:<select class="stat bonusSpirit">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Mastery Rating:<select class="stat bonusMasteryRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Crit Rating:<select class="stat bonusCritRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Haste Rating:<select class="stat bonusHasteRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Hit Rating:<select class="stat bonusHitRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Expertise Rating:<select class="stat bonusExpertise">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Dodge Rating:<select class="stat bonusDodgeRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Parry Rating:<select class="stat bonusParryRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+      Resilience:<select class="stat bonusResilienceRating">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no" selected="selected">no</option>
+      </select>
+      Spell Power:<select class="stat bonusSpellPower">
+	<option value="any">any</option>
+	<option value="yes">yes</option>
+	<option value="no">no</option>
+      </select>
+    </div>
+    <div class="item-search-results">
+    </div>
+    <input type="hidden" name="slot" value=""/>
+    <input type="hidden" name="socket" value=""/>
+    <input type="submit" onclick="$('.item-search').hide();" value="close"/>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<table>
+{{#rows}}
+<tr class="item-search-result">
+  <td>
+    <a class="item-quality-{{quality}}"
+       itemid="{{id}}" href="javascript:;//{{id}}">{{name}}</a>
+  </td>
+  <td class="item-quality-0">
+    {{itemLevel}}
+  </td>
+  <td>
+    <span>
+    {{#bonusStamina}}
+    Stamina: +{{bonusStamina}}
+    {{/bonusStamina}}
+    {{#bonusStrength}}
+    Strength: +{{bonusStrength}}
+    {{/bonusStrength}}
+    {{#bonusAgility}}
+    Agility: +{{bonusAgility}}
+    {{/bonusAgility}}
+    {{#bonusIntellect}}
+    Intellect: +{{bonusIntellect}}
+    {{/bonusIntellect}}
+    {{#bonusSpirit}}
+    Spirit: +{{bonusSpirit}}
+    {{/bonusSpirit}}
+    </span>
+    <span class="item-quality-2">
+    {{#bonusCritRating}}
+    Crit: +{{bonusCritRating}}
+    {{/bonusCritRating}}
+    {{#bonusHasteRating}}
+    Haste: +{{bonusHasteRating}}
+    {{/bonusHasteRating}}
+    {{#bonusMasteryRating}}
+    Mastery +{{bonusMasteryRating}}
+    {{/bonusMasteryRating}}
+    {{#bonusHitRating}}
+    Hit +{{bonusHitRating}}
+    {{/bonusHitRating}}
+    {{#bonusExpertiseRating}}
+    Expertise +{{bonusExpertiseRating}}
+    {{/bonusExpertiseRating}}
+    {{#bonusDodgeRating}}
+    Dodge +{{bonusDodgeRating}}
+    {{/bonusDodgeRating}}
+    {{#bonusParryRating}}
+    Parry +{{bonusParryRating}}
+    {{/bonusParryRating}}
+    {{#bonusResilienceRating}}
+    Resiliance: +{{bonusResilienceRating}}
+    {{/bonusResilienceRating}}
+    {{#bonusSpellPower}}
+    SpellPower: +{{bonusSpellPower}}
+    {{/bonusSpellPower}}    
+    </span>
+  </td>
+  <td>
+    {{#sockets}}
+    {{.}}
+    {{/sockets}}
+  </td>
+</tr>
+{{/rows}}
+</table>

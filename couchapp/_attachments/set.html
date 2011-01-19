@@ -35,29 +35,24 @@
       </table>
     </div>
     <div class="item-search" style="display: none;">
-      <div class="item-search-box">
-	<div class="item-search-inner">
-	  <div class="item-search-input">
-	  </div>
-	  <div class="item-search-results">
-	  </div>
-	  <input type="submit" onclick="$('.item-search').hide();" value="close"/>
-	</div>
-      </div>
     </div>
   </body>
+  <script src="script/constants.js"></script>
   <script src="script/state_manager.js"></script>
+  <script src="script/set_data.js"></script>
   <script src="vendor/couchapp/loader.js"></script>
   <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
-        $("tr.slot").evently("items", app);
-        $(".item-search-input").evently("search", app);
-        $(".item-search-results").evently("searchResults", app);
-        $.evently.connect(".item-search-input", 
-                          ".item-search-results", ["addSearchResults"]);
-        $.evently.connect(".item-search-results", 
-                          "tr.slot", ["getItem"]);
-        StateManager.loadState();
+        $("tr.slot").evently("slot", app);
+        $(".item-search").evently("search", app);
+    
+
+        //$(".item-search-results").evently("searchResults", app);
+        //$.evently.connect(".item-search-input", 
+        //                  ".item-search-results", ["addSearchResults"]);
+        //$.evently.connect(".item-search-results", 
+        //                  "tr.slot", ["getItem"]);
+        //StateManager.loadState();
     });
   </script>
 </html>

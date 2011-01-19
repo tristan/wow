@@ -1,5 +1,5 @@
 function() {
-    $.log("building search query");
+    $.log("evently/search/buildSearchQuery.js", $(this));
     var classId = null;
     var subclassId = null;
     var invType = null;
@@ -80,8 +80,8 @@ function() {
 	classId: classId,
 	subclassId: subclassId,
 	invType: invType,
-	itemLevel: { from: $(this).find("input.ilvlf").val(),
-		     to: $(this).find("input.ilvlt").val() }
+	itemLevel: { from: $(this).find("input.ilvlf:visible").val(),
+		     to: $(this).find("input.ilvlt:visible").val() }
     };
-    $(this).trigger('search', query);
+    $(".item-search-results").trigger('search', query);
 }

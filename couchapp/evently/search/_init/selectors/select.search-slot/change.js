@@ -2,6 +2,8 @@ function(evt, gemcolor) {
     // search/_init/selectors/select.search-slot/change.js
     var val = $(this).val();
     $(".search-subclass").hide();
+    $(".ilvls-for-items").show();
+    $(".ilvls-for-gems").hide();
     switch (val) {
 	case "15":
 	    $(".search-mh").show();
@@ -19,6 +21,8 @@ function(evt, gemcolor) {
 	    break;
 	case "18":
 	    $(".search-gem").show();
+	    $(".ilvls-for-items").hide();
+	    $(".ilvls-for-gems").show();
 	    $.log(gemcolor);
 	    switch (gemcolor) {
 		case "Red":

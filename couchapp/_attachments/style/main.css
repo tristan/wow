@@ -38,11 +38,17 @@ a { outline: none; text-decoration: none; }
 .inventory .item-quality-7 a.item .frame { background-position: -392px 0; }
 
 /* socket icons */
-.socket-outer {
+.socket {
     /*width: 15px;
     height: 15px;*/
+    border: 3px solid;
+    padding: 2px;
     float: left;
     margin-right: 4px;
+}
+
+.socket>span {
+    cursor: pointer;
 }
 
 .socket-bonus {
@@ -63,15 +69,6 @@ a { outline: none; text-decoration: none; }
     position: relative;
     top: -15px;
     background: url("../images/icons/frames/sockets.png") no-repeat;
-}
-
-.socket-outer {
-    border: 3px solid;
-    padding: 2px;
-}
-
-.socket {
-    color: white;
 }
 
 .socket-Meta { background-color: #29292a;

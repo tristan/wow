@@ -1,0 +1,122 @@
+<!-- evently/slot/item/mustache.html -->
+<td class="slot">{{slot}}</td>
+<td class="item">
+  <a class="item-quality-{{quality}}" href="javascript:;//{{id}}">{{name}}</a>
+  <span class="item-quality-0">({{itemLevel}})</span>
+</td>
+<td class="stats">
+  <span>
+    {{#bonusStamina}}
+    Stamina: +{{bonusStamina}}
+    {{/bonusStamina}}
+    {{#bonusStrength}}
+    Strength: +{{bonusStrength}}
+    {{/bonusStrength}}
+    {{#bonusAgility}}
+    Agility: +{{bonusAgility}}
+    {{/bonusAgility}}
+    {{#bonusIntellect}}
+    Intellect: +{{bonusIntellect}}
+    {{/bonusIntellect}}
+    {{#bonusSpirit}}
+    Spirit: +{{bonusSpirit}}
+    {{/bonusSpirit}}
+  </span>
+  <span class="item-quality-2">
+    {{#bonusCritRating}}
+    Crit: +{{bonusCritRating}}
+    {{/bonusCritRating}}
+    {{#bonusHasteRating}}
+    Haste: +{{bonusHasteRating}}
+    {{/bonusHasteRating}}
+    {{#bonusMasteryRating}}
+    Mastery +{{bonusMasteryRating}}
+    {{/bonusMasteryRating}}
+    {{#bonusHitRating}}
+    Hit +{{bonusHitRating}}
+    {{/bonusHitRating}}
+    {{#bonusExpertiseRating}}
+    Expertise +{{bonusExpertiseRating}}
+    {{/bonusExpertiseRating}}
+    {{#bonusDodgeRating}}
+    Dodge +{{bonusDodgeRating}}
+    {{/bonusDodgeRating}}
+    {{#bonusParryRating}}
+    Parry +{{bonusParryRating}}
+    {{/bonusParryRating}}
+    {{#bonusResilienceRating}}
+    Resiliance: +{{bonusResilienceRating}}
+    {{/bonusResilienceRating}}
+    {{#bonusSpellPower}}
+    SpellPower: +{{bonusSpellPower}}
+    {{/bonusSpellPower}}
+  </span>
+</td>
+<td class="reforge-from">
+  <select class="reforge rff">
+    <option value="none"></option>
+    {{#bonusSpirit}}
+    <option value="bonusSpirit">Spirit</option>
+    {{/bonusSpirit}}
+    {{#bonusCritRating}}
+    <option value="bonusCritRating">Crit</option>
+    {{/bonusCritRating}}
+    {{#bonusHasteRating}}
+    <option value="bonusHasteRating">Haste</option>
+    {{/bonusHasteRating}}
+    {{#bonusMasteryRating}}
+    <option value="bonusMasteryRating">Mastery</option>
+    {{/bonusMasteryRating}}
+    {{#bonusHitRating}}
+    <option value="bonusHitRating">Hit</option>
+    {{/bonusHitRating}}
+    {{#bonusExpertiseRating}}
+    <option value="bonusExpertiseRating">Expertise</option>
+    {{/bonusExpertiseRating}}
+    {{#bonusDodgeRating}}
+    <option value="bonusDodgeRating">Dodge</option>
+    {{/bonusDodgeRating}}
+    {{#bonusParryRating}}
+    <option value="bonusParryRating">Parry</option>
+    {{/bonusParryRating}}
+  </select>
+</td>
+<td class="reforge-to">
+  <select class="reforge rft">
+    <option value="none"></option>
+    {{^bonusSpirit}}
+    <option value="bonusSpirit">Spirit</option>
+    {{/bonusSpirit}}
+    {{^bonusCritRating}}
+    <option value="bonusCritRating">Crit</option>
+    {{/bonusCritRating}}
+    {{^bonusHasteRating}}
+    <option value="bonusHasteRating">Haste</option>
+    {{/bonusHasteRating}}
+    {{^bonusMasteryRating}}
+    <option value="bonusMasteryRating">Mastery</option>
+    {{/bonusMasteryRating}}
+    {{^bonusHitRating}}
+    <option value="bonusHitRating">Hit</option>
+    {{/bonusHitRating}}
+    {{^bonusExpertiseRating}}
+    <option value="bonusExpertiseRating">Expertise</option>
+    {{/bonusExpertiseRating}}
+    {{^bonusDodgeRating}}
+    <option value="bonusDodgeRating">Dodge</option>
+    {{/bonusDodgeRating}}
+    {{^bonusParryRating}}
+    <option value="bonusParryRating">Parry</option>
+    {{/bonusParryRating}}
+  </select>
+</td>
+<td class="sockets">
+  {{#sockets}}
+  <div class="socket socket-{{colour}} g{{index}}"
+       socket="{{index}}"
+       colour="{{colour}}">
+    <span>{{colour}}</span>
+  </div>
+  {{/sockets}}
+</td>
+<td class="enchant"></td>
