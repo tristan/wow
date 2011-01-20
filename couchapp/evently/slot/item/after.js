@@ -4,8 +4,7 @@ function(result,event,request) {
 	var item = result.rows[0].value;
 	// save state
 	StateManager.setItem($(this).attr("slot"),
-			     item,
-			     request.re);
+			     item);
 	// add reforge values for each stat
 	for (key in reforgeIds) {
 	    if (item[key] != null) {
@@ -21,12 +20,14 @@ function(result,event,request) {
 		$(this).find(".rff").val(rf[0]);
 		$(this).find(".rft").val(rf[1]);
 	    }
+	    StateManager.setReforge($(this).attr("slot"),
+				    request.re);
 	}
 	// set gems
 	for (k in request) {
 	    var g = k.match(/g\d/);
 	    if (g != null) {
-		$("." + k).trigger("set", request[k]);
+		$(this).find("." + k).trigger("set", request[k]);
 	    }
 	}
     }

@@ -1,2 +1,48 @@
 <!-- evently/slot/item/selectors/div.socket/set/mustache.html -->
-<span class="gem-subclassId-{{subclassId}}">{{id}}</span>
+<span class="gem-subclassId-{{subclassId}}">
+  {{#bonusStamina}}
+  Stamina: +{{bonusStamina}}
+  {{/bonusStamina}}
+  {{#bonusStrength}}
+  Strength: +{{bonusStrength}}
+  {{/bonusStrength}}
+  {{#bonusAgility}}
+  Agility: +{{bonusAgility}}
+  {{/bonusAgility}}
+  {{#bonusIntellect}}
+  Intellect: +{{bonusIntellect}}
+  {{/bonusIntellect}}
+  {{#bonusSpirit}}
+  Spirit: +{{bonusSpirit}}
+  {{/bonusSpirit}}
+  {{#bonusCritRating}}
+  Crit: +{{bonusCritRating}}
+  {{/bonusCritRating}}
+  {{#bonusHasteRating}}
+  Haste: +{{bonusHasteRating}}
+  {{/bonusHasteRating}}
+  {{#bonusMasteryRating}}
+  Mastery +{{bonusMasteryRating}}
+  {{/bonusMasteryRating}}
+  {{#bonusHitRating}}
+  Hit +{{bonusHitRating}}
+  {{/bonusHitRating}}
+  {{#bonusExpertiseRating}}
+  Expertise +{{bonusExpertiseRating}}
+  {{/bonusExpertiseRating}}
+  {{#bonusDodgeRating}}
+  Dodge +{{bonusDodgeRating}}
+  {{/bonusDodgeRating}}
+  {{#bonusParryRating}}
+  Parry +{{bonusParryRating}}
+  {{/bonusParryRating}}
+  {{#bonusResilienceRating}}
+  Resiliance: +{{bonusResilienceRating}}
+  {{/bonusResilienceRating}}
+  {{#bonusSpellPower}}
+  SpellPower: +{{bonusSpellPower}}
+  {{/bonusSpellPower}}
+  {{#miscStats}}
+  {{.}}
+  {{/miscStats}}
+</span>

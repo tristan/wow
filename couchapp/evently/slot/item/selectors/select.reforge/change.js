@@ -12,7 +12,8 @@ function(event) {
 	from = $(this).parent().siblings(".reforge-from").children(".rff").val();
     }
     if (from != "none" && to != "none") {
-	//StateManager.setReforge(slot, from, to);
-	$.log("TODO: set reforge in state", slot, from, to);
+	StateManager.setReforge(slot, from, to);
+    } else {
+	StateManager.setReforge(slot, null);
     }
 }
