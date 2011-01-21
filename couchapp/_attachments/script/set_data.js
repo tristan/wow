@@ -25,7 +25,6 @@ function overall_item_stats(item, reforge, gems, enchant) {
 	var re = reforgeIdsReverse[reforge];
 	if (re != null) {
 	    var re_val = parseInt(item[re[0]] * 0.4);
-	    $.log(re_val, re[0], result[re[0]], re[1], result[re[1]]);
 	    result[re[0]] = (result[re[0]] || 0) + re_val;
 	    result[re[1]] = (result[re[1]] || 0) + re_val;
 	}

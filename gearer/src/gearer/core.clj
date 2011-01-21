@@ -45,3 +45,25 @@
 		     :body f})))))
        )))))
 
+
+
+(defn watch-requested []
+  (process-stream
+   "http://tk:qwertyui@localhost:5984/wow/_changes?feed=continuous&filter=wow/requested&heartbeat=5000"
+   (fn [i]
+     (println "processing: " (i :id))
+     (let [i (get-json (str "http://localhost:5984/wow/" (i :id)))]
+       (cond (= (i :type) "item") ; item
+	     nil ; TODO: implement
+	     (= (i :type) "character") ; otherwise character
+	     (let [server (.replaceAll (.toLowerCase (i :realm)) "'" "") 
+		   domain (i :domain)
+		   character (i :character)]
+	       (try
+		(put-json
+		 (str "http://localhost:5984/wow/" (i :_id))
+		 (assoc (dissoc i :requested) 
+		   :inventory (bn/character domain server character)))
+		(catch Exception e)))
+	     :else
+	     nil)))))

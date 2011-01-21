@@ -388,9 +388,30 @@
     (reduce
      (fn [inv div]
        (assoc inv
-	 (keyword ((div :attrs) :data-type))
-	 (((x/select-node
-	    div "div/div/div/a") :attrs) :data-item)))
+	 (keyword ((div :attrs) :data-id))
+	 (let [data-item (((x/select-node
+			    div "div/div/div/a") :attrs) :data-item)
+	       sockets (filter #(= ((% :attrs) :class) "sockets")
+			       ((x/select-node
+				 div "div/div/div/div") :content))
+	       ]
+	   (if (empty? sockets)
+	     data-item
+	     (re/str-join
+	      "&"
+	      (concat 
+	       (remove #(re-find #"^g\d=\d+$" %) (re/re-split #"&" data-item))
+	       (map #(str "g" %1 "=" %2)
+		    (iterate inc 0)
+		    (remove 
+		     nil?
+		     (for [span ((first sockets) :content)]
+		       (let [a (x/select-node span "span/a")]
+			 (if (nil? a)
+			   nil
+			   (last
+			    (re-find #"/wow/en/item/(\d+)" 
+				     ((a :attrs) :href))))))))))))))
      {}
      (inventory :content))))
 

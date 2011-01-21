@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="style/main.css" type="text/css">
   </head>
   <body>
+    <div class="load">
+    </div>
     <div class="inventory">
       <table>
 	<thead>
@@ -42,11 +44,14 @@
   <script src="script/constants.js"></script>
   <script src="script/set_data.js"></script>
   <script src="script/state_manager.js"></script>
+  <script src="script/loadcharacter.js"></script>
   <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
         $("tr.slot").evently("slot", app);
         $(".item-search").evently("search", app);
         $(".set-stats").evently("stats", app);
+        $("div.load").evently("character", app);
+        //$("input[name=load]").bind("click", loadCharacter);
 
         //$(".item-search-results").evently("searchResults", app);
         //$.evently.connect(".item-search-input", 
