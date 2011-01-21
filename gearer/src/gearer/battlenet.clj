@@ -392,11 +392,13 @@
 	 (let [data-item (((x/select-node
 			    div "div/div/div/a") :attrs) :data-item)
 	       sockets (filter #(= ((% :attrs) :class) "sockets")
-			       ((x/select-node
-				 div "div/div/div/div") :content))
+			       ((or 
+				 (x/select-node
+				  div "div/div/div/div")
+				 {:content []}) :content))
 	       ]
-	   (if (empty? sockets)
-	     data-item
+	   (if (or (nil? data-item) (empty? sockets))
+	     (or data-item "")
 	     (re/str-join
 	      "&"
 	      (concat 

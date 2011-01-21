@@ -64,6 +64,6 @@
 		 (str "http://localhost:5984/wow/" (i :_id))
 		 (assoc (dissoc i :requested) 
 		   :inventory (bn/character domain server character)))
-		(catch Exception e)))
+		(catch Exception e (.printStackTrace e))))
 	     :else
 	     nil)))))
