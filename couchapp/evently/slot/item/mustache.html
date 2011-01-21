@@ -1,5 +1,13 @@
 <!-- evently/slot/item/mustache.html -->
 <td class="slot">{{slot}}</td>
+<td class="sites">
+  <a href="http://us.battle.net/wow/en/item/{{id}}" target="_blank">
+    <img src="images/icons/wow.ico"/>
+  </a>
+  <a href="http://www.wowhead.com/item={{id}}" target="_blank">
+    <img src="images/icons/wowhead.png"/>
+  </a>
+</td>
 <td class="item">
   <a class="item-quality-{{quality}}" href="javascript:;//{{id}}">{{name}}</a>
   <span class="item-quality-0">({{itemLevel}})</span>

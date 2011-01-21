@@ -30,6 +30,9 @@ function(result,event,request) {
 		$(this).find("." + k).trigger("set", request[k]);
 	    }
 	}
+
+	// update stats
+	$(".set-stats").trigger("update");
     }
 }
 

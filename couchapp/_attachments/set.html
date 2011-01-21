@@ -9,7 +9,7 @@
       <table>
 	<thead>
 	  <tr>
-	    <th>Slot</th><th>Item</th><th>Stats</th>
+	    <th>Slot</th><th></th><th>Item</th><th>Stats</th>
 	    <th>Reforge</th><th>to</th><th>Gems</th><th>Enchant</th>
 	  </tr>
 	</thead>
@@ -34,6 +34,7 @@
 	</tbody>
       </table>
     </div>
+    <div class="set-stats"></div>
     <div class="item-search" style="display: none;">
     </div>
   </body>
@@ -45,7 +46,7 @@
     $.couch.app(function(app) {
         $("tr.slot").evently("slot", app);
         $(".item-search").evently("search", app);
-    
+        $(".set-stats").evently("stats", app);
 
         //$(".item-search-results").evently("searchResults", app);
         //$.evently.connect(".item-search-input", 

@@ -8,5 +8,6 @@ function(response,event,request) {
 	var gems = {};
 	gems["g"+socket] = gem;
 	StateManager.setGems(slot, gems);
+	$(".set-stats").trigger("update");
     }
 }

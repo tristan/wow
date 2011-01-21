@@ -1,23 +1,4 @@
-<table>
-{{#rows}}
-<tr class="item-search-result">
-  <td class="sites">
-    <a href="http://us.battle.net/wow/en/item/{{id}}" target="_blank">
-      <img src="images/icons/wow.ico"/>
-    </a>
-    <a href="http://www.wowhead.com/item={{id}}" target="_blank">
-      <img src="images/icons/wowhead.png"/>
-    </a>
-  </td>
-  <td class="name">
-    <a class="item-quality-{{quality}}"
-       itemid="{{id}}" href="javascript:;//{{id}}">{{name}}</a>
-  </td>
-  <td class="item-quality-0">
-    {{itemLevel}}
-  </td>
-  <td>
-    <span>
+  <span>
     {{#bonusStamina}}
     Stamina: +{{bonusStamina}}
     {{/bonusStamina}}
@@ -33,8 +14,8 @@
     {{#bonusSpirit}}
     Spirit: +{{bonusSpirit}}
     {{/bonusSpirit}}
-    </span>
-    <span class="item-quality-2">
+  </span>
+  <span class="item-quality-2">
     {{#bonusCritRating}}
     Crit: +{{bonusCritRating}}
     {{/bonusCritRating}}
@@ -61,14 +42,6 @@
     {{/bonusResilienceRating}}
     {{#bonusSpellPower}}
     SpellPower: +{{bonusSpellPower}}
-    {{/bonusSpellPower}}    
-    </span>
-  </td>
-  <td>
-    {{#sockets}}
-    {{.}}
-    {{/sockets}}
-  </td>
-</tr>
-{{/rows}}
-</table>
+    {{/bonusSpellPower}}
+  </span>
+</div>

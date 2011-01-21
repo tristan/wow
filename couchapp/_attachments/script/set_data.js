@@ -1,5 +1,5 @@
 function merge_stats(m1, m2) {
-    var r = m1;
+    var r = $.extend(true, {}, m1);
     for (k in m2) {
 	if (typeof(m2[k]) == "number") {
 	    if (r[k] != undefined) {
@@ -16,14 +16,16 @@ function overall_item_stats(item, reforge, gems, enchant) {
     if (item == null) {
 	return {};
     }
+    gems = gems || [];
     item.sockets = item.sockets || [];
     item.socketBonus = item.socketBonus || {};
 
-    var result = item;
+    var result = $.extend(true, {}, item);
     if (reforge != null) {	
 	var re = reforgeIdsReverse[reforge];
 	if (re != null) {
 	    var re_val = parseInt(item[re[0]] * 0.4);
+	    $.log(re_val, re[0], result[re[0]], re[1], result[re[1]]);
 	    result[re[0]] = (result[re[0]] || 0) + re_val;
 	    result[re[1]] = (result[re[1]] || 0) + re_val;
 	}
