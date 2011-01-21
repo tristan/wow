@@ -255,7 +255,7 @@
 				     (= id "stat-45")
 				     (assoc m :bonusSpellPower v)
 				     (= id "stat-37")
-				     (assoc m :bonusExpretiseRating v)
+				     (assoc m :bonusExpertiseRating v)
 				     (= id "stat-36")
 				     (assoc m :bonusHasteRating v)
 				     (= id "stat-35")
@@ -319,7 +319,7 @@
 						  (= stat "Spell Power")
 						  :bonusSpellPower
 						  (= stat "Expertise Rating")
-						  :bonusExpretiseRating
+						  :bonusExpertiseRating
 						  (= stat "Haste Rating")
 						  :bonusHasteRating
 						  (= stat "Resilience Rating")

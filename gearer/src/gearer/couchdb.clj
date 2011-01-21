@@ -150,6 +150,16 @@
 	  (put-json (str "http://localhost:5984/wow/item-" (item :id))
 		    item))))))
 
+(defn fix-expertise []
+  (let [results (get-json "http://localhost:5984/wow/_design/wow/_view/items")]
+    (doseq [item (map #(get % :value) (results :rows))]
+      (when (contains? item :bonusExpretiseRating)
+	(println item)
+	(put-json (str "http://localhost:5984/wow/item-" (item :id))
+		  (assoc (dissoc item :bonusExpretiseRating)
+		    :bonusExpertiseRating
+		    (item :bonusExpretiseRating)))))))
+
 (defn test-search []
   (let [r (post-json 
 	   "http://localhost:5984/wow/_design/wow/_view/items-by-slot"
