@@ -15,10 +15,10 @@ function(response,event,request) {
 	if (item.socketBonus != null) {
 	    var bonus = {};
 	    for (k in item.socketBonus) {
-		var stat = k.match(/^bonus(\w+)$/);
+		var stat = k.match(/^bonus(\w+)$/) || [];
 		if (stat.length > 1) {
 		    stat = stat[1];
-		    var stat1 = stat.match(/^(\w+)Rating$/);
+		    var stat1 = stat.match(/^(\w+)Rating$/) || [];
 		    if (stat1.length > 1) {
 			bonus.socketBonusStat = stat1[1] + " Rating";
 		    } else {
