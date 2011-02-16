@@ -190,3 +190,8 @@ a { outline: none; text-decoration: none; }
     color: white;
     margin-bottom: 2px;
 }
+
+.set-stats {
+   padding: 5px;
+   border: 1px solid black;
+}

@@ -13,7 +13,9 @@ function(event) {
     }
     if (from != "none" && to != "none") {
 	StateManager.setReforge(slot, from, to);
+	$(".set-stats").trigger("update");
     } else {
 	StateManager.setReforge(slot, null);
+	$(".set-stats").trigger("update");
     }
 }

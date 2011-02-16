@@ -22,6 +22,8 @@ function(result,event,request) {
 	    }
 	    StateManager.setReforge($(this).attr("slot"),
 				    request.re);
+	} else {
+	    StateManager.setReforge($(this).attr("slot"), null);
 	}
 	// set gems
 	for (k in request) {
