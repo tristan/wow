@@ -29,7 +29,6 @@
 		   (.drawImage (.getImage img) 0 0 nil))))
       (.setSize 47 47))))
    
-
 (defn make-panel []
   (doto (JPanel. (FlowLayout.))
     (.add (make-slot 6))
