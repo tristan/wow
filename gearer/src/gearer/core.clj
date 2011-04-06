@@ -1,74 +1,48 @@
 (ns gearer.core
-  (:use gearer.http)
-  (:require
-   [gearer.battlenet :as bn]
-   [clj-http.client :as c]
-   [clojure.contrib.str-utils :as re]))
+  (:require [gearer.utils :as utils])
+  (:import (java.awt AlphaComposite
+		     FlowLayout
+		     Graphics
+		     Graphics2D)
+	   (java.awt.event ActionListener)
+	   (java.awt.image LookupOp
+			   CropImageFilter
+			   FilteredImageSource)
+	   (javax.swing JFrame
+			JPanel
+			JLabel
+			JButton
+			ImageIcon)))
 
-(defn load-requested-items []
-  (doseq [i (map #(get % :value)
-	     (get (get-json "http://localhost:5984/wow/_design/items/_view/requested") 
-		 :rows []))]
-    (put-json
-     (str "http://localhost:5984/wow/item-" (i :id))
-     (merge i (bn/item (i :id))))))
+(defn make-slot [s] ; s is the index of the slot icon
+					; head neck sholders chest tabard shirt wrists hands waist legs feet ring trinket mh oh ranged relic
+  (let [img (utils/crop-image (ImageIcon. (utils/get-resource "images/item-empty-bg.png"))
+			      0 (* s 47) 47 47)
+	alpha 1]
+    (doto
+	(proxy [JPanel] []
+	  (paint [#^Graphics g]
+		 (proxy-super paint g)
+		 (doto (cast Graphics2D g)
+		   (.setComposite
+		    (AlphaComposite/getInstance AlphaComposite/SRC_OVER alpha))
+		   (.drawImage (.getImage img) 0 0 nil))))
+      (.setSize 47 47))))
+   
 
-(defn process-requested-item [i]
-  (when (contains? i :id)
-    (println "processing: " (i :id))
-    (let [i (get-json (str "http://localhost:5984/wow/" (i :id)))
-	  i (merge i (bn/item (i :id)))
-	  icon-file-name (str (i :icon) ".jpg")]
-      (put-json ; save document
-       (str "http://localhost:5984/wow/item-" (i :id))
-       i)
-      (doseq [s ["18" "56"]] ; store the icons for this item
-	(let [icons (get-json (str "http://localhost:5984/wow/icons%2F" s))
-	      rev (if (contains? icons :_rev) ; if no :_rev, then we create the doc
-		    (icons :_rev)
-		    ((post-json "http://localhost:5984/wow/"
-				{:_id (str "icons/" s)}) :rev))]
-	  (when
-	      (not
-	       (and (contains? icons :_attachments)
-		    (contains? (icons :_attachments) (keyword icon-file-name))))
-	    (let [f (get-file
-		     (str "http://us.battle.net/wow-assets/static/images/icons/"
-			  s "/" icon-file-name))]
-	      
-	      (c/put (str "http://localhost:5984/wow/icons%2F" s "/" icon-file-name
-			  (str "?rev=" rev))
-		     {:headers {"Content-Type" "image/jpeg"}
-		      :body f}))))))))
-  
-(defn watch-requested-items []
-  (process-stream
-   "http://localhost:5984/wow/_changes?feed=continuous&filter=items/requested&heartbeat=5000"
-   ; todo: this should append to a list and handled by an agent
-   process-requested-item
-   ))
+(defn make-panel []
+  (doto (JPanel. (FlowLayout.))
+    (.add (make-slot 6))
+    (.add (doto (JButton. "Press Me")
+	    (.addActionListener
+	     (proxy [ActionListener] []
+	       (actionPerformed [e] (println e))))))))
+
+(defn make-frame []
+  (doto (JFrame. "Gearer")
+    (.setBounds 300 300 600 400)
+    (.add (make-panel))
+    (.setVisible true)))
 
 
-(defn process-requested [i]
-  (println "processing: " (i :id))
-  (let [i (get-json (str "http://tk:qwertyui@localhost:5984/wow/" (i :id)))]
-    (println i)
-    (cond (= (i :type) "item") ; item
-	  nil ; TODO: implement
-	  (= (i :type) "character") ; otherwise character
-	  (let [server (.replaceAll (.toLowerCase (i :realm)) "'" "") 
-		domain (i :domain)
-		character (i :character)]
-	    (try
-	      (put-json
-	       (str "http://tk:qwertyui@localhost:5984/wow/" (i :_id))
-	       (assoc (dissoc i :requested) 
-		 :inventory (bn/character domain server character)))
-	      (catch Exception e (.printStackTrace e))))
-	  :else
-	  nil)))
 
-(defn watch-requested []
-  (process-stream
-   "http://tk:qwertyui@localhost:5984/wow/_changes?feed=continuous&filter=wow/requested&heartbeat=5000"
-   process-requested))
