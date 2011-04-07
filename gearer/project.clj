@@ -2,5 +2,6 @@
   :description "FIXME: write"
   :dependencies [[org.clojure/clojure "1.2.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
-		 [clj-http "0.1.1"]]
+		 [clj-http "0.1.1"]
+		 [com.miglayout/miglayout "3.7.4"]]
   :dev-dependencies [[swank-clojure "1.2.0"]])

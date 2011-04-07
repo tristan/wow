@@ -1,7 +1,8 @@
 (ns gearer.gui
   (:use gearer.gui.layouts gearer.gui.convenience)
   (:require [gearer.utils :as utils]
-	    [gearer.battlenet :as bnet])
+	    [gearer.battlenet :as bnet]
+	    [gearer.gui.mig :as mig])
   (:import (java.awt AlphaComposite
 		     Color
 		     FlowLayout
@@ -13,32 +14,37 @@
 	   (java.awt.image LookupOp
 			   CropImageFilter
 			   FilteredImageSource)
-	   (javax.swing JFrame
+	   (javax.swing DefaultComboBoxModel
+			JComboBox
+			JFrame
 			JPanel
 			JLabel
 			JButton
 			JOptionPane
 			JTextField
 			ImageIcon
-			SwingUtilities)))
+			SwingUtilities)
+	   (javax.swing.border LineBorder)))
 
-(defn create-item-panel [slot-id]
-  (let [icon (doto (JButton. 
+(defn create-item-panel [slot-id name]
+  (let [icon (doto (JLabel. 
 		    (utils/crop-image 
 		     (ImageIcon. (utils/get-resource "images/item-empty-bg.png"))
 				      0 (* slot-id 47) 47 47))
-	       (.setMargin (Insets. 1 1 1 1)))
-	name (JLabel. "name")
-	stats (JLabel. "stats") ; TODO: make it a panel with flow layout, 1 label per stat
+	       )
+	name (JLabel. name)
+	stats (JLabel. "") ; TODO: make it a panel with flow layout, 1 label per stat
 					; so colors can be set
 	panel (doto (JPanel. (GridBagLayout.))
-		 (grid-bag-layout
-		  :insets (Insets. 1 1 1 1)
-		  :gridx 0 :gridy 0 :gridheight 3 icon
-		  :fill :HORIZONTAL :gridheight 1
-		  :gridx 1 name
-		  :gridy 1 stats))]
+		(.setBorder (LineBorder. Color/black))
+		(grid-bag-layout
+		 :insets (Insets. 1 1 1 1)
+		 :gridx 0 :gridy 0 :gridheight 3 :anchor :FIRST_LINE_START icon
+		 :fill :HORIZONTAL :gridheight 1
+		 :gridx 1 name
+		 :gridy 1 stats))]
     (doto icon
+      (comment
       (with-action e
 	(send (agent (Integer/parseInt (JOptionPane/showInputDialog "Input Item ID")))
 	      (fn [item-id]
@@ -66,48 +72,57 @@
 				   (Color. 229 204 128)
 				   :else
 				   (Color/black)))
-		       (.setText name (get item :name))))))))))
+		       (.setText name (get item :name)))))))))
+      )
+      )
     panel))
 
-(defn open1 []
-  (let [id (JTextField. 10)
-	name (JTextField. 20)
-	load (doto (JButton. "Load")
-	       (with-action e
-		 (send (agent (Integer/parseInt (.getText id)))
-		       (fn [item-id]
-			 (println "loading item" item-id)
-			 (let [item (bnet/item item-id)]
-			   (println item)
-			   (if (not (nil? item))
-			     (SwingUtilities/invokeLater 
-			      (fn [] 
-				(.setText name (get item :name))
-			      ))
-			     (println "no item found")))))))
-	panel (doto (JPanel. (GridBagLayout.))
-		(grid-bag-layout
-		 :gridx 0 :gridy 0 :anchor :LINE_END
-		 :insets (Insets. 5 5 5 5)
-		 (JLabel. "ID:")
-		 :gridy 1
-		 (JLabel. "Name:")
-		 :gridx 1 :gridy 0 :fill :HORIZONTAL
-		 id
-		 :gridy 1 :gridwidth :REMAINDER :fill :HORIZONTAL
-		 name
-		 :gridx 2 :gridy 0 :gridwidth 1 :anchor :LINE_START
-		 load
-		 ))]
-    1))
+(defn slot-panel [slot-id]
+  (let [icon (utils/crop-image 
+	      (ImageIcon. (utils/get-resource "images/item-empty-bg.png"))
+	      0 (* slot-id 47) 47 47)]
+    (doto (JPanel. (mig/create-layout "insets 0"))
+      (.add (JLabel. icon))
+      (.add
+       (doto (JPanel. (mig/create-layout 
+		       "insets 0, fillx"))
+	 (.add (doto (JPanel. (mig/create-layout
+			       "insets 0, debug, fillx"
+			       "[][]push[][]"))
+		 (.add (JLabel. "Elementium Gutslicer"))
+		 (.add (JLabel. "Heroic"))
+		 (.add (JLabel. "346"))
+		 (.add (JLabel. "GEMS GO HERE")))
+	       "wrap")
+	 (.add (doto (JPanel. (mig/create-layout
+			       "insets 0, fillx"))
+		 (.add (JLabel. "+194 Stamina"))
+		 (.add (JLabel. "+129 Agility"))
+		 (.add (JLabel. "+86 Mastery Rating"))
+		 (.add (JLabel. "+52 Hit Rating"))
+		 (.add (JLabel. "+34"))
+		 (.add (doto (JComboBox.)
+			 (.setModel 
+			  (DefaultComboBoxModel. (to-array ["Expertise Rating"
+							    "Crit Rating"
+							    "Haste Rating"
+							    "Spirit"])))))))
+	 )))))
+
+(defn inventory-panel []
+  (doto (JPanel. (mig/create-layout 
+		  "wrap 1, insets 0, gap 2"))
+    (.add (slot-panel 0))
+    (.add (slot-panel 1))
+    (.add (slot-panel 2))))
 
 (defn open []
-  (let [head-panel (create-item-panel 0)]
-    (doto (JFrame. "Gearer")
-      (.setContentPane
-       head-panel)
-      (.pack)
-      (.setVisible true))))
+  (doto (JFrame. "Gearer")
+    (.setBounds 300 300 300 (* 49 12))
+    (.setLayout (mig/create-layout "novisualpadding, gap 0, insets 2"))
+    (.add (inventory-panel))
+    (.pack)
+    (.setVisible true)))
 
 (defn main []
   (SwingUtilities/invokeLater
