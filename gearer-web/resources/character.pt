@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Learning Couchapp, evently and mustache!</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+  </head>
+  <body>
+    <div class="load">
+    </div>
+    <div class="inventory">
+      <table>
+	<thead>
+	  <tr>
+	    <th>Slot</th><th></th><th>Item</th><th>Stats</th>
+	    <th>Reforge</th><th>to</th><th>Gems</th><th>Enchant</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr id="main-hand" slot="15" class="slot"></tr>
+	  <tr id="off-hand" slot="16" class="slot"></tr>
+	  <tr id="ranged" slot="17" class="slot"></tr>
+	  <tr id="head" slot="0" class="slot"></tr>
+	  <tr id="neck" slot="1" class="slot"></tr>
+	  <tr id="sholders" slot="2" class="slot"></tr>
+	  <tr id="back" slot="14" class="slot"></tr>
+	  <tr id="chest" slot="4" class="slot"></tr>
+	  <tr id="wrists" slot="8" class="slot"></tr>
+	  <tr id="hands" slot="9" class="slot"></tr>
+	  <tr id="waist" slot="5" class="slot"></tr>
+	  <tr id="legs" slot="6" class="slot"></tr>
+	  <tr id="feet" slot="7" class="slot"></tr>
+	  <tr id="ring1" slot="10" class="slot"></tr>
+	  <tr id="ring2" slot="11" class="slot"></tr>
+	  <tr id="trinket1" slot="12" class="slot"></tr>
+	  <tr id="trinket2" slot="13" class="slot"></tr>
+	</tbody>
+      </table>
+    </div>
+    <div class="extra-stats"></div>
+    <div class="set-stats"></div>
+    <div class="item-search" style="display: none;">
+    </div>
+  </body>
+  <script src="js/loader.js"/>
+  <script src="js/character.js"/>
+</html>

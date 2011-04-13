@@ -8,7 +8,7 @@
 
 (defn slot-panel [slot-id]
   (let [icon (utils/crop-image 
-	      (ImageIcon. (utils/get-resource "images/item-empty-bg.png"))
+	      (utils/get-icon "images/item-empty-bg.png")
 	      0 (* slot-id 47) 47 47)]
     (mig/new-panel
      "insets 0"

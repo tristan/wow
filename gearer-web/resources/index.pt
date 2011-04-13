@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Gearer</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css"/>
+  </head>
+  <body>
+    <h1>Gearer</h1>
+    <p>
+      <form id="char-form" action="" method="get">
+	<label for="domain">Domain: </label>
+	<select name="domain">
+	  <option value="us">us</option>
+	  <option value="eu">eu</option>
+	</select>
+	<label for="realm">Realm: </label>
+	<input type="text" name="realm" value="jubei'thos"/>
+	<label for="character">Character: </label>
+	<input type="text" name="character" value="ra"/>
+	<input type="submit" value="load"/>
+      </form>
+    </p>
+  </body>
+  <script src="js/loader.js"/>
+  <script src="js/index.js"/>
+</html>

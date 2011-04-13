@@ -16,3 +16,6 @@
 
 (defn get-resource [#^String name]
   (.getResource (.getContextClassLoader (Thread/currentThread)) name))
+
+(defn get-icon [#^String resource-name]
+  (ImageIcon. (get-resource resource-name)))
